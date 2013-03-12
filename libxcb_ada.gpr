@@ -1,0 +1,12 @@
+project libxcb_ada is
+
+   for Source_Dirs use ("../libxcb_ada/");
+   for Object_Dir use "../libxcb_ada/";
+
+   for Externally_Built use "True";
+
+   package Linker is
+     for Linker_Options use ("-lxcb_ada");
+   end Linker;
+
+end libxcb_ada;
