@@ -275,6 +275,18 @@ package xproto is
       dst_y      : Interfaces.Unsigned_16) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_warp_pointer, "xcb_warp_pointer");
 
+   type xcb_query_extension_reply_t is record
+      response_type : aliased Interfaces.Unsigned_8;
+      pad0          : aliased Interfaces.Unsigned_8;
+      sequence      : aliased Interfaces.Unsigned_16;
+      length        : aliased Interfaces.Unsigned_32;
+      present       : aliased Interfaces.Unsigned_8;
+      major_opcode  : aliased Interfaces.Unsigned_8;
+      first_event   : aliased Interfaces.Unsigned_8;
+      first_error   : aliased Interfaces.Unsigned_8;
+   end record;
+   pragma Convention (C, xcb_query_extension_reply_t);
+
    function xcb_query_pointer (connection : xcb.xcb_connection_t;
                                window     : xcb_window_t)
                                return xcb_query_pointer_cookie_t;
