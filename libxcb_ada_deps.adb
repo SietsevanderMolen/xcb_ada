@@ -1,6 +1,7 @@
 pragma Warnings (Off);
 with xcb;
 with xproto;
+with xinerama;
 pragma Warnings (On);
 
 procedure libxcb_ada_deps is

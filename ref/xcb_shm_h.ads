@@ -17,11 +17,26 @@ package xcb_shm_h is
    --  unsupported macro: XCB_SHM_PUT_IMAGE 3
    --  unsupported macro: XCB_SHM_GET_IMAGE 4
    --  unsupported macro: XCB_SHM_CREATE_PIXMAP 5
+  -- * This file generated automatically from shm.xml by c_client.py.
+  -- * Edit at your peril.
+  --  
+
+  --*
+  -- * @defgroup XCB_Shm_API XCB Shm API
+  -- * @brief Shm XCB Protocol Implementation.
+  -- * @{
+  -- * 
+
    xcb_shm_id : aliased xcb_xcb_h.xcb_extension_t;  -- /usr/include/xcb/shm.h:25
    pragma Import (C, xcb_shm_id, "xcb_shm_id");
 
    subtype xcb_shm_seg_t is stdint_h.uint32_t;  -- /usr/include/xcb/shm.h:27
 
+  --*
+  -- * @brief xcb_shm_seg_iterator_t
+  -- * 
+
+  --*<   
    type xcb_shm_seg_iterator_t is record
       data : access xcb_shm_seg_t;  -- /usr/include/xcb/shm.h:33
       c_rem : aliased int;  -- /usr/include/xcb/shm.h:34
@@ -29,6 +44,14 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_seg_iterator_t);  -- /usr/include/xcb/shm.h:32
 
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_completion.  
+  --*
+  -- * @brief xcb_shm_completion_event_t
+  -- * 
+
+  --*<   
    type xcb_shm_completion_event_t is record
       response_type : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:45
       pad0 : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:46
@@ -42,13 +65,33 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_completion_event_t);  -- /usr/include/xcb/shm.h:44
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_bad_seg.  
    subtype xcb_shm_bad_seg_error_t is xcb_xproto_h.xcb_value_error_t;
 
+  --*
+  -- * @brief xcb_shm_query_version_cookie_t
+  -- * 
+
+  --*<   
    type xcb_shm_query_version_cookie_t is record
       sequence : aliased unsigned;  -- /usr/include/xcb/shm.h:65
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_query_version_cookie_t);  -- /usr/include/xcb/shm.h:64
 
+  --* Opcode for xcb_shm_query_version.  
+  --*
+  -- * @brief xcb_shm_query_version_request_t
+  -- * 
+
+  --*<   
    type xcb_shm_query_version_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:75
       minor_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:76
@@ -56,6 +99,13 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_query_version_request_t);  -- /usr/include/xcb/shm.h:74
 
+  --*<   
+  --*<   
+  --*
+  -- * @brief xcb_shm_query_version_reply_t
+  -- * 
+
+  --*<   
    type anon3966_anon3968_array is array (0 .. 14) of aliased stdint_h.uint8_t;
    type xcb_shm_query_version_reply_t is record
       response_type : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:84
@@ -71,6 +121,21 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_query_version_reply_t);  -- /usr/include/xcb/shm.h:83
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_attach.  
+  --*
+  -- * @brief xcb_shm_attach_request_t
+  -- * 
+
+  --*<   
    type anon3971_anon1853_array is array (0 .. 2) of aliased stdint_h.uint8_t;
    type xcb_shm_attach_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:103
@@ -83,6 +148,18 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_attach_request_t);  -- /usr/include/xcb/shm.h:102
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_detach.  
+  --*
+  -- * @brief xcb_shm_detach_request_t
+  -- * 
+
+  --*<   
    type xcb_shm_detach_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:119
       minor_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:120
@@ -91,6 +168,15 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_detach_request_t);  -- /usr/include/xcb/shm.h:118
 
+  --*<   
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_put_image.  
+  --*
+  -- * @brief xcb_shm_put_image_request_t
+  -- * 
+
+  --*<   
    type xcb_shm_put_image_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:132
       minor_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:133
@@ -114,11 +200,40 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_put_image_request_t);  -- /usr/include/xcb/shm.h:131
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*
+  -- * @brief xcb_shm_get_image_cookie_t
+  -- * 
+
+  --*<   
    type xcb_shm_get_image_cookie_t is record
       sequence : aliased unsigned;  -- /usr/include/xcb/shm.h:157
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_get_image_cookie_t);  -- /usr/include/xcb/shm.h:156
 
+  --* Opcode for xcb_shm_get_image.  
+  --*
+  -- * @brief xcb_shm_get_image_request_t
+  -- * 
+
+  --*<   
    type anon3981_anon1853_array is array (0 .. 2) of aliased stdint_h.uint8_t;
    type xcb_shm_get_image_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:167
@@ -137,6 +252,23 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_get_image_request_t);  -- /usr/include/xcb/shm.h:166
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*
+  -- * @brief xcb_shm_get_image_reply_t
+  -- * 
+
+  --*<   
    type xcb_shm_get_image_reply_t is record
       response_type : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:186
       depth : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:187
@@ -147,6 +279,17 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_get_image_reply_t);  -- /usr/include/xcb/shm.h:185
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --* Opcode for xcb_shm_create_pixmap.  
+  --*
+  -- * @brief xcb_shm_create_pixmap_request_t
+  -- * 
+
+  --*<   
    type anon3987_anon1853_array is array (0 .. 2) of aliased stdint_h.uint8_t;
    type xcb_shm_create_pixmap_request_t is record
       major_opcode : aliased stdint_h.uint8_t;  -- /usr/include/xcb/shm.h:201
@@ -163,24 +306,168 @@ package xcb_shm_h is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_shm_create_pixmap_request_t);  -- /usr/include/xcb/shm.h:200
 
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*<   
+  --*
+  -- * Get the next element of the iterator
+  -- * @param i Pointer to a xcb_shm_seg_iterator_t
+  -- *
+  -- * Get the next element in the iterator. The member rem is
+  -- * decreased by one. The member data points to the next
+  -- * element. The member index is increased by sizeof(xcb_shm_seg_t)
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** void xcb_shm_seg_next
+  -- ** 
+  -- ** @param xcb_shm_seg_iterator_t *i
+  -- ** @returns void
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    procedure xcb_shm_seg_next (arg1 : access xcb_shm_seg_iterator_t);  -- /usr/include/xcb/shm.h:233
    pragma Import (C, xcb_shm_seg_next, "xcb_shm_seg_next");
 
+  --*
+  -- * Return the iterator pointing to the last element
+  -- * @param i An xcb_shm_seg_iterator_t
+  -- * @return  The iterator pointing to the last element
+  -- *
+  -- * Set the current element in the iterator to the last element.
+  -- * The member rem is set to 0. The member data points to the
+  -- * last element.
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_generic_iterator_t xcb_shm_seg_end
+  -- ** 
+  -- ** @param xcb_shm_seg_iterator_t i
+  -- ** @returns xcb_generic_iterator_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_seg_end (arg1 : xcb_shm_seg_iterator_t) return xcb_xcb_h.xcb_generic_iterator_t;  -- /usr/include/xcb/shm.h:255
    pragma Import (C, xcb_shm_seg_end, "xcb_shm_seg_end");
 
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_query_version_cookie_t xcb_shm_query_version
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @returns xcb_shm_query_version_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_query_version (arg1 : System.Address) return xcb_shm_query_version_cookie_t;  -- /usr/include/xcb/shm.h:276
    pragma Import (C, xcb_shm_query_version, "xcb_shm_query_version");
 
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will cause
+  -- * a reply to be generated. Any returned error will be
+  -- * placed in the event queue.
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_query_version_cookie_t xcb_shm_query_version_unchecked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @returns xcb_shm_query_version_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_query_version_unchecked (arg1 : System.Address) return xcb_shm_query_version_cookie_t;  -- /usr/include/xcb/shm.h:300
    pragma Import (C, xcb_shm_query_version_unchecked, "xcb_shm_query_version_unchecked");
 
+  --*
+  -- * Return the reply
+  -- * @param c      The connection
+  -- * @param cookie The cookie
+  -- * @param e      The xcb_generic_error_t supplied
+  -- *
+  -- * Returns the reply of the request asked by
+  -- * 
+  -- * The parameter @p e supplied to this function must be NULL if
+  -- * xcb_shm_query_version_unchecked(). is used.
+  -- * Otherwise, it stores the error if any.
+  -- *
+  -- * The returned value must be freed by the caller using free().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_query_version_reply_t * xcb_shm_query_version_reply
+  -- ** 
+  -- ** @param xcb_connection_t                *c
+  -- ** @param xcb_shm_query_version_cookie_t   cookie
+  -- ** @param xcb_generic_error_t            **e
+  -- ** @returns xcb_shm_query_version_reply_t *
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_query_version_reply
      (arg1 : System.Address;
       arg2 : xcb_shm_query_version_cookie_t;
       arg3 : System.Address) return access xcb_shm_query_version_reply_t;  -- /usr/include/xcb/shm.h:329
    pragma Import (C, xcb_shm_query_version_reply, "xcb_shm_query_version_reply");
 
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will not cause
+  -- * a reply to be generated. Any returned error will be
+  -- * saved for handling by xcb_request_check().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_attach_checked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          shmid
+  -- ** @param uint8_t           read_only
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_attach_checked
      (arg1 : System.Address;
       arg2 : xcb_shm_seg_t;
@@ -188,6 +475,31 @@ package xcb_shm_h is
       arg4 : stdint_h.uint8_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:358
    pragma Import (C, xcb_shm_attach_checked, "xcb_shm_attach_checked");
 
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_attach
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          shmid
+  -- ** @param uint8_t           read_only
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_attach
      (arg1 : System.Address;
       arg2 : xcb_shm_seg_t;
@@ -195,12 +507,97 @@ package xcb_shm_h is
       arg4 : stdint_h.uint8_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:385
    pragma Import (C, xcb_shm_attach, "xcb_shm_attach");
 
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will not cause
+  -- * a reply to be generated. Any returned error will be
+  -- * saved for handling by xcb_request_check().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_detach_checked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_detach_checked (arg1 : System.Address; arg2 : xcb_shm_seg_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:413
    pragma Import (C, xcb_shm_detach_checked, "xcb_shm_detach_checked");
 
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_detach
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_detach (arg1 : System.Address; arg2 : xcb_shm_seg_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:436
    pragma Import (C, xcb_shm_detach, "xcb_shm_detach");
 
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will not cause
+  -- * a reply to be generated. Any returned error will be
+  -- * saved for handling by xcb_request_check().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_put_image_checked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param xcb_gcontext_t    gc
+  -- ** @param uint16_t          total_width
+  -- ** @param uint16_t          total_height
+  -- ** @param uint16_t          src_x
+  -- ** @param uint16_t          src_y
+  -- ** @param uint16_t          src_width
+  -- ** @param uint16_t          src_height
+  -- ** @param int16_t           dst_x
+  -- ** @param int16_t           dst_y
+  -- ** @param uint8_t           depth
+  -- ** @param uint8_t           format
+  -- ** @param uint8_t           send_event
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_put_image_checked
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_drawable_t;
@@ -220,6 +617,55 @@ package xcb_shm_h is
       arg16 : stdint_h.uint32_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:476
    pragma Import (C, xcb_shm_put_image_checked, "xcb_shm_put_image_checked");
 
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_put_image
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param xcb_gcontext_t    gc
+  -- ** @param uint16_t          total_width
+  -- ** @param uint16_t          total_height
+  -- ** @param uint16_t          src_x
+  -- ** @param uint16_t          src_y
+  -- ** @param uint16_t          src_width
+  -- ** @param uint16_t          src_height
+  -- ** @param int16_t           dst_x
+  -- ** @param int16_t           dst_y
+  -- ** @param uint8_t           depth
+  -- ** @param uint8_t           format
+  -- ** @param uint8_t           send_event
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_put_image
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_drawable_t;
@@ -239,6 +685,49 @@ package xcb_shm_h is
       arg16 : stdint_h.uint32_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:527
    pragma Import (C, xcb_shm_put_image, "xcb_shm_put_image");
 
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_get_image_cookie_t xcb_shm_get_image
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param int16_t           x
+  -- ** @param int16_t           y
+  -- ** @param uint16_t          width
+  -- ** @param uint16_t          height
+  -- ** @param uint32_t          plane_mask
+  -- ** @param uint8_t           format
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_shm_get_image_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_get_image
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_drawable_t;
@@ -252,6 +741,46 @@ package xcb_shm_h is
       arg10 : stdint_h.uint32_t) return xcb_shm_get_image_cookie_t;  -- /usr/include/xcb/shm.h:572
    pragma Import (C, xcb_shm_get_image, "xcb_shm_get_image");
 
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will cause
+  -- * a reply to be generated. Any returned error will be
+  -- * placed in the event queue.
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_get_image_cookie_t xcb_shm_get_image_unchecked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param int16_t           x
+  -- ** @param int16_t           y
+  -- ** @param uint16_t          width
+  -- ** @param uint16_t          height
+  -- ** @param uint32_t          plane_mask
+  -- ** @param uint8_t           format
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_shm_get_image_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_get_image_unchecked
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_drawable_t;
@@ -265,12 +794,79 @@ package xcb_shm_h is
       arg10 : stdint_h.uint32_t) return xcb_shm_get_image_cookie_t;  -- /usr/include/xcb/shm.h:614
    pragma Import (C, xcb_shm_get_image_unchecked, "xcb_shm_get_image_unchecked");
 
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- * Return the reply
+  -- * @param c      The connection
+  -- * @param cookie The cookie
+  -- * @param e      The xcb_generic_error_t supplied
+  -- *
+  -- * Returns the reply of the request asked by
+  -- * 
+  -- * The parameter @p e supplied to this function must be NULL if
+  -- * xcb_shm_get_image_unchecked(). is used.
+  -- * Otherwise, it stores the error if any.
+  -- *
+  -- * The returned value must be freed by the caller using free().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_shm_get_image_reply_t * xcb_shm_get_image_reply
+  -- ** 
+  -- ** @param xcb_connection_t            *c
+  -- ** @param xcb_shm_get_image_cookie_t   cookie
+  -- ** @param xcb_generic_error_t        **e
+  -- ** @returns xcb_shm_get_image_reply_t *
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_get_image_reply
      (arg1 : System.Address;
       arg2 : xcb_shm_get_image_cookie_t;
       arg3 : System.Address) return access xcb_shm_get_image_reply_t;  -- /usr/include/xcb/shm.h:652
    pragma Import (C, xcb_shm_get_image_reply, "xcb_shm_get_image_reply");
 
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  -- * This form can be used only if the request will not cause
+  -- * a reply to be generated. Any returned error will be
+  -- * saved for handling by xcb_request_check().
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_create_pixmap_checked
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_pixmap_t      pid
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param uint16_t          width
+  -- ** @param uint16_t          height
+  -- ** @param uint8_t           depth
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_create_pixmap_checked
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_pixmap_t;
@@ -282,6 +878,39 @@ package xcb_shm_h is
       arg8 : stdint_h.uint32_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:685
    pragma Import (C, xcb_shm_create_pixmap_checked, "xcb_shm_create_pixmap_checked");
 
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- *
+  -- * @param c The connection
+  -- * @return A cookie
+  -- *
+  -- * Delivers a request to the X server.
+  -- * 
+  --  
+
+  --****************************************************************************
+  -- **
+  -- ** xcb_void_cookie_t xcb_shm_create_pixmap
+  -- ** 
+  -- ** @param xcb_connection_t *c
+  -- ** @param xcb_pixmap_t      pid
+  -- ** @param xcb_drawable_t    drawable
+  -- ** @param uint16_t          width
+  -- ** @param uint16_t          height
+  -- ** @param uint8_t           depth
+  -- ** @param xcb_shm_seg_t     shmseg
+  -- ** @param uint32_t          offset
+  -- ** @returns xcb_void_cookie_t
+  -- **
+  -- **************************************************************************** 
+
+  --*<  
    function xcb_shm_create_pixmap
      (arg1 : System.Address;
       arg2 : xcb_xproto_h.xcb_pixmap_t;
@@ -292,5 +921,16 @@ package xcb_shm_h is
       arg7 : xcb_shm_seg_t;
       arg8 : stdint_h.uint32_t) return xcb_xcb_h.xcb_void_cookie_t;  -- /usr/include/xcb/shm.h:720
    pragma Import (C, xcb_shm_create_pixmap, "xcb_shm_create_pixmap");
+
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*<  
+  --*
+  -- * @}
+  --  
 
 end xcb_shm_h;

@@ -3,6 +3,23 @@ with bits_types_h;
 
 package sys_types_h is
 
+  -- Copyright (C) 1991,1992,1994-2002,2006,2010 Free Software Foundation, Inc.
+  --   This file is part of the GNU C Library.
+  --   The GNU C Library is free software; you can redistribute it and/or
+  --   modify it under the terms of the GNU Lesser General Public
+  --   License as published by the Free Software Foundation; either
+  --   version 2.1 of the License, or (at your option) any later version.
+  --   The GNU C Library is distributed in the hope that it will be useful,
+  --   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  --   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  --   Lesser General Public License for more details.
+  --   You should have received a copy of the GNU Lesser General Public
+  --   License along with the GNU C Library; if not, see
+  --   <http://www.gnu.org/licenses/>.   
+
+  -- *	POSIX Standard: 2.6 Primitive System Data Types	<sys/types.h>
+  --  
+
    subtype u_char is bits_types_h.uu_u_char;  -- /usr/include/sys/types.h:33
 
    subtype u_short is bits_types_h.uu_u_short;  -- /usr/include/sys/types.h:34
@@ -45,12 +62,17 @@ package sys_types_h is
 
    subtype key_t is bits_types_h.uu_key_t;  -- /usr/include/sys/types.h:122
 
+  -- Old compatibility names for C types.   
    subtype ulong is unsigned_long;  -- /usr/include/sys/types.h:150
 
    subtype ushort is unsigned_short;  -- /usr/include/sys/types.h:151
 
    subtype uint is unsigned;  -- /usr/include/sys/types.h:152
 
+  -- These size-specific names are used by some of the inet code.   
+  -- These types are defined by the ISO C99 header <inttypes.h>.  
+  -- But these were defined by ISO C without the first `_'.   
+  -- For GCC 2.7 and later, we can use specific type-size attributes.   
    subtype int8_t is signed_char;  -- /usr/include/sys/types.h:194
 
    subtype int16_t is short;  -- /usr/include/sys/types.h:195
@@ -69,12 +91,29 @@ package sys_types_h is
 
    subtype register_t is long;  -- /usr/include/sys/types.h:205
 
+  -- Some code from BIND tests this macro to see if the types above are
+  --   defined.   
+
+  -- In BSD <sys/types.h> is expected to define BYTE_ORDER.   
+  -- It also defines `fd_set' and the FD_* macros for `select'.   
+  -- BSD defines these symbols, so we follow.   
    subtype blksize_t is bits_types_h.uu_blksize_t;  -- /usr/include/sys/types.h:228
 
+  -- Types from the Large File Support interface.   
+  -- Type to count number of disk blocks.   
    subtype blkcnt_t is bits_types_h.uu_blkcnt_t;  -- /usr/include/sys/types.h:235
 
+  -- Type to count file system blocks.   
    subtype fsblkcnt_t is bits_types_h.uu_fsblkcnt_t;  -- /usr/include/sys/types.h:239
 
+  -- Type to count file system inodes.   
    subtype fsfilcnt_t is bits_types_h.uu_fsfilcnt_t;  -- /usr/include/sys/types.h:243
 
+  -- Type to count number of disk blocks.   
+  -- Type to count file system blocks.   
+  -- Type to count file system inodes.   
+  -- Type to count number of disk blocks.  
+  -- Type to count file system blocks.   
+  -- Type to count file system inodes.   
+  -- Now add the thread types.   
 end sys_types_h;

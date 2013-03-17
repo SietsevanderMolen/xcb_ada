@@ -4,6 +4,23 @@ with System;
 
 package bits_pthreadtypes_h is
 
+  -- Copyright (C) 2002-2007, 2012 Free Software Foundation, Inc.
+  --   This file is part of the GNU C Library.
+  --   The GNU C Library is free software; you can redistribute it and/or
+  --   modify it under the terms of the GNU Lesser General Public
+  --   License as published by the Free Software Foundation; either
+  --   version 2.1 of the License, or (at your option) any later version.
+  --   The GNU C Library is distributed in the hope that it will be useful,
+  --   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  --   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  --   Lesser General Public License for more details.
+  --   You should have received a copy of the GNU Lesser General Public
+  --   License along with the GNU C Library; if not, see
+  --   <http://www.gnu.org/licenses/>.   
+
+  -- Thread identifiers.  The structure of the attribute type is not
+  --   exposed on purpose.   
+
    subtype pthread_t is unsigned_long;  -- /usr/include/bits/pthreadtypes.h:60
 
    subtype anon1016_anon1018_array is Interfaces.C.char_array (0 .. 55);
@@ -26,6 +43,9 @@ package bits_pthreadtypes_h is
 
    subtype uu_pthread_list_t is uu_pthread_internal_list;
 
+  -- Data structures for mutex handling.  The structure of the attribute
+  --   type is not exposed on purpose.   
+
    type uu_pthread_mutex_s is record
       uu_lock : aliased int;  -- /usr/include/bits/pthreadtypes.h:94
       uu_count : aliased unsigned;  -- /usr/include/bits/pthreadtypes.h:95
@@ -36,6 +56,9 @@ package bits_pthreadtypes_h is
       uu_list : aliased uu_pthread_list_t;  -- /usr/include/bits/pthreadtypes.h:105
    end record;
    pragma Convention (C_Pass_By_Copy, uu_pthread_mutex_s);  -- /usr/include/bits/pthreadtypes.h:92
+
+  -- KIND must stay at this position in the structure to maintain
+  --       binary compatibility.   
 
    subtype anon1023_anon1026_array is Interfaces.C.char_array (0 .. 39);
    type anon_1023 (discr : unsigned := 0) is record
@@ -76,6 +99,9 @@ package bits_pthreadtypes_h is
    end record;
    pragma Convention (C_Pass_By_Copy, pthread_mutexattr_t);
    pragma Unchecked_Union (pthread_mutexattr_t);  -- /usr/include/bits/pthreadtypes.h:124
+
+  -- Data structure for conditional variable handling.  The structure of
+  --   the attribute type is not exposed on purpose.   
 
    type anon_1033 is record
       uu_lock : aliased int;  -- /usr/include/bits/pthreadtypes.h:133
@@ -127,9 +153,14 @@ package bits_pthreadtypes_h is
    pragma Convention (C_Pass_By_Copy, pthread_condattr_t);
    pragma Unchecked_Union (pthread_condattr_t);  -- /usr/include/bits/pthreadtypes.h:150
 
+  -- Keys for thread-specific data  
    subtype pthread_key_t is unsigned;  -- /usr/include/bits/pthreadtypes.h:154
 
+  -- Once-only execution  
    subtype pthread_once_t is int;  -- /usr/include/bits/pthreadtypes.h:158
+
+  -- Data structure for read-write lock variable handling.  The
+  --   structure of the attribute type is not exposed on purpose.   
 
    type anon_1044 is record
       uu_lock : aliased int;  -- /usr/include/bits/pthreadtypes.h:169
@@ -145,6 +176,12 @@ package bits_pthreadtypes_h is
       uu_flags : aliased unsigned;  -- /usr/include/bits/pthreadtypes.h:181
    end record;
    pragma Convention (C_Pass_By_Copy, anon_1044);  -- /usr/include/bits/pthreadtypes.h:167
+
+  -- FLAGS must stay at this position in the structure to maintain
+  --       binary compatibility.   
+
+  -- FLAGS must stay at this position in the structure to maintain
+  --       binary compatibility.   
 
    type pthread_rwlock_t;
    type pthread_rwlock_t_uu_data_struct is record
@@ -187,7 +224,11 @@ package bits_pthreadtypes_h is
    pragma Convention (C_Pass_By_Copy, pthread_rwlockattr_t);
    pragma Unchecked_Union (pthread_rwlockattr_t);  -- /usr/include/bits/pthreadtypes.h:210
 
+  -- POSIX spinlock data type.   
    subtype pthread_spinlock_t is int;  -- /usr/include/bits/pthreadtypes.h:216
+
+  -- POSIX barriers data type.  The structure of the type is
+  --   deliberately not exposed.   
 
    subtype pthread_barrier_t_uu_size_array is Interfaces.C.char_array (0 .. 31);
    type pthread_barrier_t (discr : unsigned := 0) is record
@@ -213,4 +254,5 @@ package bits_pthreadtypes_h is
    pragma Convention (C_Pass_By_Copy, pthread_barrierattr_t);
    pragma Unchecked_Union (pthread_barrierattr_t);  -- /usr/include/bits/pthreadtypes.h:231
 
+  -- Extra attributes for the cleanup functions.   
 end bits_pthreadtypes_h;

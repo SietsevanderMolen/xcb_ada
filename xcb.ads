@@ -2,6 +2,7 @@ with System,
      Interfaces.C,
      Interfaces.C.Strings;
 limited with xproto;
+limited with xinerama;
 
 package xcb is
    package IC renames Interfaces.C;
@@ -16,7 +17,12 @@ package xcb is
    XCB_CURRENT_TIME : constant Interfaces.Unsigned_32 := 0;
 
    subtype xcb_connection_t is System.Address;
-   subtype xcb_extension_t is System.Address;
+
+   type xcb_extension_t is record
+      name      : aliased ICS.chars_ptr;
+      global_id : aliased Interfaces.Integer_32;
+   end record;
+   pragma Convention (C, xcb_extension_t);
 
    type xcb_generic_error_t_pad_array is array (0 .. 4) of aliased Interfaces.Unsigned_32;
    type xcb_generic_error_t is record
@@ -56,27 +62,27 @@ package xcb is
                          return xcb_connection_t;
    pragma Import (C, xcb_connect, "xcb_connect");
 
-   --  Test whether the connection has shut down due to a fatal error. 
+   --  Test whether the connection has shut down due to a fatal error
    function xcb_connection_has_error (c : xcb_connection_t)
       return Integer;
    pragma Import (C, xcb_connection_has_error, "xcb_connection_has_error");
 
-   --  Forces any buffered output to be written to the server. 
+   --  Forces any buffered output to be written to the server
    function xcb_flush (connection : xcb_connection_t) return Integer;
    pragma Import (C, xcb_flush, "xcb_flush");
 
    --  Caches reply information from QueryExtension requests.
    function xcb_get_extension_data (connection: xcb_connection_t;
                                     extension : xcb_extension_t)
-      return access constant xproto.xcb_query_extension_reply_t;
+      return access xproto.xcb_query_extension_reply_t;
    pragma Import (C, xcb_get_extension_data, "xcb_get_extension_data");
 
-   --  Access the data returned by the server. 
+   --  Access the data returned by the server
    function xcb_get_setup (connection : xcb_connection_t)
       return access xproto.xcb_setup_t;
    pragma Import (C, xcb_get_setup, "xcb_get_setup");
 
-   --  Returns the next event or error from the server. 
+   --  Returns the next event or error from the server
    function xcb_wait_for_event (connection : xcb_connection_t)
       return xcb_generic_event_t_p;
    pragma Import (C, xcb_wait_for_event, "xcb_wait_for_event");
