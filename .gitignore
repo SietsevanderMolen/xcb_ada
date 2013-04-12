@@ -1,4 +1,4 @@
 *.ali
 *.o
 *.a
-libxcb_ada/
+xcbada/

@@ -1,33 +1,32 @@
-LIBNAME = libxcbada
+LIBNAME = xcbada
+DEPS = $(LIBNAME)_deps
+
 .POSIX:
 GNATPREPFLAGS = -c -r
 GCCFLAGS = -O2
 GNATMAKE=gnatmake
-
 RANLIB = ranlib
-
 CC = gcc
-DEPS = libxcbada_deps
+INSTALL = /usr/bin/install -c
 PREFIX = /usr/lib
 
-all: libxcbada
+all: $(LIBNAME)
 
 # ------------------------------------
-# compilation of libxcbada packages
+# compilation of xcbada packages
 # ------------------------------------
 #
-# "deps.adb" is a dummy main program, with dependencies
-# that should force compilation of all libxcbada packages;
+# "xcbada_deps.adb" is a dummy main program, with dependencies
+# that should force compilation of all xcbada packages;
 #
-libxcbada_deps:
-	$(GNATMAKE) -g -c -Plibxcbada_build $@
+$(DEPS):
+	$(GNATMAKE) -g -c -Pxcbada_build $@
 
 # -----------------------------------
-# Create a libxcbada library for objects
+# Create a xcbada library for objects
 # -----------------------------------
 # 
-libxcbada: $(DEPS)
-	@echo "Creating libxcb-ada.a in directory libxcbada"
+xcbada: $(DEPS)
 	@if [ -d $(LIBNAME) ]; then rm -rf $(LIBNAME); fi
 	mkdir $(LIBNAME)
 	cp -p *.ads $(LIBNAME)
@@ -38,6 +37,8 @@ libxcbada: $(DEPS)
 	-$(RANLIB) $(LIBNAME)/$(LIBNAME).a
 	chmod 444 $(LIBNAME)/*.ali
 	rm -f $(LIBNAME)/*.o
+	rm -f *.o
+	rm -f *.ali
 
 # -----------------------------------
 # Maintenance targets
@@ -52,18 +53,25 @@ clean:
 distclean:
 	rm -rf $(LIBNAME)
 	rm -f *.o *.ali a.out *# *~ $(EXECUTABLES) b_*.c b~*
-# install libxcbada
+# install xcbada
 install:
 	# make needed dirs
 	mkdir -p /usr/share/ada/adainclude/$(LIBNAME)/
 	mkdir -p /usr/lib/ada/adalib/$(LIBNAME)/
+
+	# fix permissions
+	/bin/chmod 755 /usr/share/ada/ -R
+	/bin/chmod 755 /usr/lib/ada/ -R
+
 	# copy library files
 	cp -pr $(LIBNAME)/*.ali /usr/lib/ada/adalib/$(LIBNAME)/
+	cp -pr $(LIBNAME)/$(LIBNAME).a /usr/lib/lib$(LIBNAME).a
 	# copy includes
 	cp -pr $(LIBNAME)/*.ads /usr/share/ada/adainclude/$(LIBNAME)/
 	cp -pr $(LIBNAME)/*.adb /usr/share/ada/adainclude/$(LIBNAME)/
 	# copy project file
 	cp -p $(LIBNAME).gpr /usr/share/ada/adainclude/
+
 uninstall:
 	rm -rf /usr/share/ada/adainclude/$(LIBNAME)/
 	rm -rf /usr/share/ada/adainclude/$(LIBNAME).gpr

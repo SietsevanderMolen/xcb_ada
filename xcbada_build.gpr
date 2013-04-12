@@ -1,4 +1,4 @@
-project libxcbada_build is
+project xcbada_build is
    type Build_Type is ("Debug", "Production");
    Build : Build_Type := External ("Build", "Production");
 
@@ -12,4 +12,4 @@ project libxcbada_build is
             for Default_Switches ("Ada") use ("-O2", "-gnatp");
       end case;
    end Compiler;
-end libxcbada_build;
+end xcbada_build;

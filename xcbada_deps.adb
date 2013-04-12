@@ -4,7 +4,7 @@ with xproto;
 with xinerama;
 pragma Warnings (On);
 
-procedure libxcbada_deps is
+procedure xcbada_deps is
 begin
    null;
-end libxcbada_deps;
+end xcbada_deps;
