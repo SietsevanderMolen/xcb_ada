@@ -1,3 +1,4 @@
+LIBNAME = libxcbada
 .POSIX:
 GNATPREPFLAGS = -c -r
 GCCFLAGS = -O2
@@ -6,37 +7,37 @@ GNATMAKE=gnatmake
 RANLIB = ranlib
 
 CC = gcc
-DEPS = libxcb_ada_deps
+DEPS = libxcbada_deps
 PREFIX = /usr/lib
 
-all: libxcb_ada
+all: libxcbada
 
 # ------------------------------------
-# compilation of libxcb_ada packages
+# compilation of libxcbada packages
 # ------------------------------------
 #
 # "deps.adb" is a dummy main program, with dependencies
-# that should force compilation of all libxcb_ada packages;
+# that should force compilation of all libxcbada packages;
 #
-libxcb_ada_deps:
-	$(GNATMAKE) -c -Plibxcb_ada_build $@
+libxcbada_deps:
+	$(GNATMAKE) -g -c -Plibxcbada_build $@
 
 # -----------------------------------
-# Create a libxcb_ada library for objects
+# Create a libxcbada library for objects
 # -----------------------------------
 # 
-libxcb_ada: $(DEPS)
-	@echo "Creating libxcb-ada.a in directory libxcb_ada"
-	@if [ -d libxcb_ada ]; then rm -rf libxcb_ada; fi
-	mkdir libxcb_ada
-	cp -p *.ads libxcb_ada
-	cp -p *.adb libxcb_ada
-	(tar cpf - *.o *.ali) | (cd libxcb_ada; tar xpf -)
-	rm -f libxcb_ada/$(DEPS).o libxcb_ada/$(DEPS).ali
-	ar -r libxcb_ada/libxcb_ada.a libxcb_ada/*.o
-	-$(RANLIB) libxcb_ada/libxcb_ada.a
-	chmod 444 libxcb_ada/*.ali
-	rm -f libxcb_ada/*.o
+libxcbada: $(DEPS)
+	@echo "Creating libxcb-ada.a in directory libxcbada"
+	@if [ -d $(LIBNAME) ]; then rm -rf $(LIBNAME); fi
+	mkdir $(LIBNAME)
+	cp -p *.ads $(LIBNAME)
+	cp -p *.adb $(LIBNAME)
+	(tar cpf - *.o *.ali) | (cd $(LIBNAME); tar xpf -)
+	rm -f $(LIBNAME)/$(DEPS).o $(LIBNAME)/$(DEPS).ali
+	ar -r $(LIBNAME)/$(LIBNAME).a $(LIBNAME)/*.o
+	-$(RANLIB) $(LIBNAME)/$(LIBNAME).a
+	chmod 444 $(LIBNAME)/*.ali
+	rm -f $(LIBNAME)/*.o
 
 # -----------------------------------
 # Maintenance targets
@@ -44,20 +45,28 @@ libxcb_ada: $(DEPS)
 #
 # remove editor and compiler generated files
 clean:
-	rm -rf libxcb_ada
+	rm -rf $(LIBNAME)
 	rm -f *.o *.ali a.out *# *~ $(EXECUTABLES) b_*.c b~* *.dSYM
 
 # remove all generated files, including configuration history
 distclean:
-	rm -rf libxcb_ada
+	rm -rf $(LIBNAME)
 	rm -f *.o *.ali a.out *# *~ $(EXECUTABLES) b_*.c b~*
-# install libxcb_ada
+# install libxcbada
 install:
-	mkdir -p $(PREFIX)/gnat
-	cp -pr libxcb_ada $(PREFIX)/
-	cp -p libxcb_ada.gpr $(PREFIX)/gnat
+	# make needed dirs
+	mkdir -p /usr/share/ada/adainclude/$(LIBNAME)/
+	mkdir -p /usr/lib/ada/adalib/$(LIBNAME)/
+	# copy library files
+	cp -pr $(LIBNAME)/*.ali /usr/lib/ada/adalib/$(LIBNAME)/
+	# copy includes
+	cp -pr $(LIBNAME)/*.ads /usr/share/ada/adainclude/$(LIBNAME)/
+	cp -pr $(LIBNAME)/*.adb /usr/share/ada/adainclude/$(LIBNAME)/
+	# copy project file
+	cp -p $(LIBNAME).gpr /usr/share/ada/adainclude/
 uninstall:
-	rm -rf $(PREFIX)/libxcb_ada/
-	rm -rf $(PREFIX)/lib/gnat/libxcb_ada.gpr
+	rm -rf /usr/share/ada/adainclude/$(LIBNAME)/
+	rm -rf /usr/share/ada/adainclude/$(LIBNAME).gpr
+	rm -rf /usr/lib/ada/adalib/$(LIBNAME)/
 
 .PHONY: install clean distclean
