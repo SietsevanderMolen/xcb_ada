@@ -12,33 +12,12 @@ PREFIX = /usr/lib
 
 all: $(LIBNAME)
 
-# ------------------------------------
-# compilation of xcbada packages
-# ------------------------------------
-#
-# "xcbada_deps.adb" is a dummy main program, with dependencies
-# that should force compilation of all xcbada packages;
-#
-$(DEPS):
-	$(GNATMAKE) -g -c -Pxcbada_build $@
-
 # -----------------------------------
 # Create a xcbada library for objects
 # -----------------------------------
 # 
-xcbada: $(DEPS)
-	@if [ -d $(LIBNAME) ]; then rm -rf $(LIBNAME); fi
-	mkdir $(LIBNAME)
-	cp -p *.ads $(LIBNAME)
-	cp -p *.adb $(LIBNAME)
-	(tar cpf - *.o *.ali) | (cd $(LIBNAME); tar xpf -)
-	rm -f $(LIBNAME)/$(DEPS).o $(LIBNAME)/$(DEPS).ali
-	ar -r $(LIBNAME)/$(LIBNAME).a $(LIBNAME)/*.o
-	-$(RANLIB) $(LIBNAME)/$(LIBNAME).a
-	chmod 444 $(LIBNAME)/*.ali
-	rm -f $(LIBNAME)/*.o
-	rm -f *.o
-	rm -f *.ali
+xcbada:
+	gprbuild -p xcbada_build.gpr
 
 # -----------------------------------
 # Maintenance targets
@@ -46,13 +25,8 @@ xcbada: $(DEPS)
 #
 # remove editor and compiler generated files
 clean:
-	rm -rf $(LIBNAME)
-	rm -f *.o *.ali a.out *# *~ $(EXECUTABLES) b_*.c b~* *.dSYM
+	gprclean xcbada_build.gpr
 
-# remove all generated files, including configuration history
-distclean:
-	rm -rf $(LIBNAME)
-	rm -f *.o *.ali a.out *# *~ $(EXECUTABLES) b_*.c b~*
 # install xcbada
 install:
 	# make needed dirs
@@ -60,11 +34,11 @@ install:
 	mkdir -p /usr/lib/ada/adalib/$(LIBNAME)/
 
 	# copy library files
-	cp -pr $(LIBNAME)/*.ali /usr/lib/ada/adalib/$(LIBNAME)/
-	cp -pr $(LIBNAME)/$(LIBNAME).a /usr/lib/lib$(LIBNAME).a
+	cp -pr lib/*.ali /usr/lib/ada/adalib/$(LIBNAME)/
+	cp -pr lib/lib$(LIBNAME).a /usr/lib/lib$(LIBNAME).a
 	# copy includes
-	cp -pr $(LIBNAME)/*.ads /usr/share/ada/adainclude/$(LIBNAME)/
-	cp -pr $(LIBNAME)/*.adb /usr/share/ada/adainclude/$(LIBNAME)/
+	cp -pr src/*.ads /usr/share/ada/adainclude/$(LIBNAME)/
+	cp -pr src/*.adb /usr/share/ada/adainclude/$(LIBNAME)/
 	# copy project file
 	cp -p $(LIBNAME).gpr /usr/share/ada/adainclude/
 
@@ -76,5 +50,6 @@ uninstall:
 	rm -rf /usr/share/ada/adainclude/$(LIBNAME)/
 	rm -rf /usr/share/ada/adainclude/$(LIBNAME).gpr
 	rm -rf /usr/lib/ada/adalib/$(LIBNAME)/
+	rm -rf /usr/lib/lib$(LIBNAME).a
 
-.PHONY: install clean distclean
+.PHONY: install clean
