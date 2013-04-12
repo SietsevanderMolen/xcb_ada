@@ -1,12 +1,6 @@
 LIBNAME = xcbada
-DEPS = $(LIBNAME)_deps
 
 .POSIX:
-GNATPREPFLAGS = -c -r
-GCCFLAGS = -O2
-GNATMAKE=gnatmake
-RANLIB = ranlib
-CC = gcc
 INSTALL = /usr/bin/install -c
 PREFIX = /usr/lib
 
