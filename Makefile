@@ -59,10 +59,6 @@ install:
 	mkdir -p /usr/share/ada/adainclude/$(LIBNAME)/
 	mkdir -p /usr/lib/ada/adalib/$(LIBNAME)/
 
-	# fix permissions
-	/bin/chmod 755 /usr/share/ada/ -R
-	/bin/chmod 755 /usr/lib/ada/ -R
-
 	# copy library files
 	cp -pr $(LIBNAME)/*.ali /usr/lib/ada/adalib/$(LIBNAME)/
 	cp -pr $(LIBNAME)/$(LIBNAME).a /usr/lib/lib$(LIBNAME).a
@@ -71,6 +67,10 @@ install:
 	cp -pr $(LIBNAME)/*.adb /usr/share/ada/adainclude/$(LIBNAME)/
 	# copy project file
 	cp -p $(LIBNAME).gpr /usr/share/ada/adainclude/
+
+	# fix permissions
+	/bin/chmod 755 /usr/share/ada/ -R
+	/bin/chmod 755 /usr/lib/ada/ -R
 
 uninstall:
 	rm -rf /usr/share/ada/adainclude/$(LIBNAME)/
