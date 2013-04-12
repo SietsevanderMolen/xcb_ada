@@ -1,4 +1,6 @@
 *.ali
 *.o
 *.a
-xcbada/
+build/
+exe/
+lib/
