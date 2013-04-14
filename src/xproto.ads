@@ -8,7 +8,9 @@ package xproto is
    subtype xcb_colormap_t  is  Interfaces.Unsigned_32;
    subtype xcb_cursor_t    is  Interfaces.Unsigned_32;
    subtype xcb_drawable_t  is  Interfaces.Unsigned_32;
+   subtype xcb_gcontext_t  is  Interfaces.Unsigned_32;
    subtype xcb_keycode_t   is  Interfaces.Unsigned_8;
+   subtype xcb_pixmap_t    is  Interfaces.Unsigned_32;
    subtype xcb_timestamp_t is  Interfaces.Unsigned_32;
    subtype xcb_visualid_t  is  Interfaces.Unsigned_32;
    subtype xcb_window_t    is  Interfaces.Unsigned_32;
