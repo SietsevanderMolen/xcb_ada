@@ -1,5 +1,10 @@
 LIBNAME = xcbada
 
+# This is used to add a postfix to the .gpr filed copied while installing
+# We use this for easier integration with Jenkins
+# I promise I will find a better way to do this
+PROJECTFILE_POSTFIX =
+
 .POSIX:
 INSTALL = /usr/bin/install -c
 PREFIX = /usr
@@ -34,7 +39,7 @@ install:
 	cp -pr src/*.ads $(PREFIX)/share/ada/adainclude/$(LIBNAME)/
 	cp -pr src/*.adb $(PREFIX)/share/ada/adainclude/$(LIBNAME)/
 	# copy project file
-	cp -p $(LIBNAME).gpr $(PREFIX)/share/ada/adainclude/
+	cp -p $(LIBNAME)$(PROJECTFILE_POSTFIX).gpr $(PREFIX)/share/ada/adainclude/
 
 	# fix permissions
 	/bin/chmod 755 $(PREFIX)/share/ada/ -R
