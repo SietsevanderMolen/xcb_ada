@@ -39,7 +39,7 @@ install:
 	cp -pr src/*.ads $(PREFIX)/share/ada/adainclude/$(LIBNAME)/
 	cp -pr src/*.adb $(PREFIX)/share/ada/adainclude/$(LIBNAME)/
 	# copy project file
-	cp -p $(LIBNAME)$(PROJECTFILE_POSTFIX).gpr $(PREFIX)/share/ada/adainclude/
+	cp -p $(LIBNAME)$(PROJECTFILE_POSTFIX).gpr $(PREFIX)/share/ada/adainclude/$(LIBNAME).gpr
 
 	# fix permissions
 	/bin/chmod 755 $(PREFIX)/share/ada/ -R
