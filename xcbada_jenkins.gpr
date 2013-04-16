@@ -1,4 +1,4 @@
-project xcbada_jenkins is
+project xcbada is
 
    for Source_Dirs use ("/var/lib/jenkins/share/ada/adainclude/xcbada");
    for Library_ALI_Dir use "/var/lib/jenkins/lib/ada/adalib/xcbada";
@@ -7,4 +7,4 @@ project xcbada_jenkins is
    for Library_Dir use "/var/lib/jenkins/lib";
 
    for Externally_Built use "True";
-end xcbada_jenkins;
+end xcbada;
