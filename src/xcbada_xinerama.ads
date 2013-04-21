@@ -3,7 +3,7 @@ with System,
 with xcb;
 with Ada.Unchecked_Conversion;
 
-package xinerama is
+package xcbada_xinerama is
    xcb_xinerama_id : aliased xcb.xcb_extension_t;
    pragma Import (C, xcb_xinerama_id, "xcb_xinerama_id");
 
@@ -24,4 +24,4 @@ package xinerama is
    function xcb_xinerama_is_active (connection : xcb.xcb_connection_t) 
       return xcb_xinerama_is_active_cookie_t;
    pragma Import (C, xcb_xinerama_is_active, "xcb_xinerama_is_active");
-end xinerama;
+end xcbada_xinerama;

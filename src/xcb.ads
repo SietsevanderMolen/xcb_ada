@@ -1,14 +1,14 @@
 with System,
      Interfaces.C,
      Interfaces.C.Strings;
-limited with xproto;
-limited with xinerama;
+limited with xcbada_xproto;
+limited with xcbada_xinerama;
 
 package xcb is
    package IC renames Interfaces.C;
    package ICS renames IC.Strings;
    pragma Linker_Options ("-lxcb");
-   type xcb_screen_t_ptr is access all xproto.xcb_screen_t;
+   type xcb_screen_t_ptr is access all xcbada_xproto.xcb_screen_t;
 
    Null_Display : constant ICS.chars_ptr := ICS.Null_Ptr;
    Null_Screen : constant xcb_screen_t_ptr := null;
@@ -58,7 +58,7 @@ package xcb is
 
    -- Connects to the X server.
    function xcb_connect (displayname : ICS.chars_ptr;
-                         screen      : access xproto.xcb_screen_t)
+                         screen      : access xcbada_xproto.xcb_screen_t)
                          return xcb_connection_t;
    pragma Import (C, xcb_connect, "xcb_connect");
 
@@ -74,12 +74,12 @@ package xcb is
    --  Caches reply information from QueryExtension requests.
    function xcb_get_extension_data (connection: xcb_connection_t;
                                     extension : xcb_extension_t)
-      return access xproto.xcb_query_extension_reply_t;
+      return access xcbada_xproto.xcb_query_extension_reply_t;
    pragma Import (C, xcb_get_extension_data, "xcb_get_extension_data");
 
    --  Access the data returned by the server
    function xcb_get_setup (connection : xcb_connection_t)
-      return access xproto.xcb_setup_t;
+      return access xcbada_xproto.xcb_setup_t;
    pragma Import (C, xcb_get_setup, "xcb_get_setup");
 
    --  Returns the next event or error from the server

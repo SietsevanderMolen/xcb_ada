@@ -3,7 +3,7 @@ with System,
 with xcb;
 with Ada.Unchecked_Conversion;
 
-package xproto is
+package xcbada_xproto is
    subtype xcb_button_t    is  Interfaces.Unsigned_8;
    subtype xcb_colormap_t  is  Interfaces.Unsigned_32;
    subtype xcb_cursor_t    is  Interfaces.Unsigned_32;
@@ -304,4 +304,4 @@ package xproto is
                                 time       : xcb_timestamp_t)
                                 return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_ungrab_pointer, "xcb_ungrab_pointer");
-end xproto;
+end xcbada_xproto;
