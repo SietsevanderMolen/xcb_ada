@@ -75,6 +75,14 @@ package xcbada_xproto is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_grab_pointer_cookie_t);
 
+   type xcb_map_request_event_t is record
+      response_type : aliased Interfaces.Unsigned_8;
+      pad0          : aliased Interfaces.Unsigned_8;
+      sequence      : aliased Interfaces.Unsigned_16;
+      parent        : aliased xcb_window_t;
+      window        : aliased xcb_window_t;
+   end record;
+
    subtype xcb_mod_mask_t is Interfaces.Unsigned_16;
    XCB_MOD_MASK_SHIFT   : constant xcb_mod_mask_t := 1;
    XCB_MOD_MASK_LOCK    : constant xcb_mod_mask_t := 2;
