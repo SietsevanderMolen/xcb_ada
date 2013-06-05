@@ -64,6 +64,23 @@ package xcbada_xproto is
    type xcb_button_press_event_t_p is access all xcb_button_press_event_t;
    function Convert is new Ada.Unchecked_Conversion (Source => xcb.xcb_generic_event_t_p,
                                                      Target => xcb_button_press_event_t_p);
+   
+   subtype xcb_cw_t is Interfaces.Unsigned_16;
+   XCB_CW_BACK_PIXMAP		: constant xcb_cw_t	:= 1;
+   XCB_CW_BACK_PIXEL		: constant xcb_cw_t	:= 2;
+   XCB_CW_BORDER_PIXMAP		: constant xcb_cw_t	:= 4;
+   XCB_CW_BORDER_PIXEL		: constant xcb_cw_t	:= 8;
+   XCB_CW_BIT_GRAVITY		: constant xcb_cw_t	:= 16;
+   XCB_CW_WIN_GRAVITY		: constant xcb_cw_t	:= 32;
+   XCB_CW_BACKING_STORE		: constant xcb_cw_t	:= 64;
+   XCB_CW_BACKING_PLANES	: constant xcb_cw_t	:= 128;
+   XCB_CW_BACKING_PIXEL		: constant xcb_cw_t	:= 256;
+   XCB_CW_OVERRIDE_REDIRECT	: constant xcb_cw_t	:= 512;
+   XCB_CW_SAVE_UNDER		: constant xcb_cw_t	:= 1024;
+   XCB_CW_EVENT_MASK		: constant xcb_cw_t	:= 2048;
+   XCB_CW_DONT_PROPAGATE	: constant xcb_cw_t	:= 4096;
+   XCB_CW_COLORMAP		: constant xcb_cw_t	:= 8192;
+   XCB_CW_CURSOR		: constant xcb_cw_t	:= 16384;
 
    type xcb_grab_mode_t is 
      (XCB_GRAB_MODE_SYNC,
