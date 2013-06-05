@@ -112,13 +112,13 @@ package xcbada_xproto is
    XCB_MOD_MASK_ANY     : constant xcb_mod_mask_t := 32768;
 
    subtype xcb_config_window_t is Interfaces.Unsigned_16;
-   XCB_CONFIG_WINDOW_X            :  constant xcb_config_window_t := 1;
-   XCB_CONFIG_WINDOW_Y            :  constant xcb_config_window_t := 2;
-   XCB_CONFIG_WINDOW_WIDTH        :  constant xcb_config_window_t := 4;
-   XCB_CONFIG_WINDOW_HEIGHT       :  constant xcb_config_window_t := 8;
-   XCB_CONFIG_WINDOW_BORDER_WIDTH :  constant xcb_config_window_t := 16;
-   XCB_CONFIG_WINDOW_SIBLING      :  constant xcb_config_window_t := 32;
-   XCB_CONFIG_WINDOW_STACK_MODE   :  constant xcb_config_window_t := 64;
+   XCB_CONFIG_WINDOW_X            : constant xcb_config_window_t := 1;
+   XCB_CONFIG_WINDOW_Y            : constant xcb_config_window_t := 2;
+   XCB_CONFIG_WINDOW_WIDTH        : constant xcb_config_window_t := 4;
+   XCB_CONFIG_WINDOW_HEIGHT       : constant xcb_config_window_t := 8;
+   XCB_CONFIG_WINDOW_BORDER_WIDTH : constant xcb_config_window_t := 16;
+   XCB_CONFIG_WINDOW_SIBLING      : constant xcb_config_window_t := 32;
+   XCB_CONFIG_WINDOW_STACK_MODE   : constant xcb_config_window_t := 64;
 
    type xcb_get_geometry_cookie_t is record
       sequence : aliased Interfaces.Unsigned_32;
@@ -143,11 +143,11 @@ package xcbada_xproto is
    pragma Convention (C_Pass_By_Copy, xcb_get_geometry_reply_t);
 
    subtype xcb_stack_mode_t is Interfaces.Unsigned_32;
-   XCB_STACK_MODE_ABOVE     :  constant xcb_stack_mode_t := 0;
-   XCB_STACK_MODE_BELOW     :  constant xcb_stack_mode_t := 1;
-   XCB_STACK_MODE_TOP_IF    :  constant xcb_stack_mode_t := 2;
-   XCB_STACK_MODE_BOTTOM_IF :  constant xcb_stack_mode_t := 3;
-   XCB_STACK_MODE_OPPOSITE  :  constant xcb_stack_mode_t := 4;
+   XCB_STACK_MODE_ABOVE     : constant xcb_stack_mode_t := 0;
+   XCB_STACK_MODE_BELOW     : constant xcb_stack_mode_t := 1;
+   XCB_STACK_MODE_TOP_IF    : constant xcb_stack_mode_t := 2;
+   XCB_STACK_MODE_BOTTOM_IF : constant xcb_stack_mode_t := 3;
+   XCB_STACK_MODE_OPPOSITE  : constant xcb_stack_mode_t := 4;
 
    type xcb_screen_t is record
       root                  : aliased xcb_window_t;
