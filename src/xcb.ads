@@ -57,33 +57,33 @@ package xcb is
    pragma Convention (C, xcb_void_cookie_t);
 
    -- Connects to the X server.
-   function xcb_connect (displayname : ICS.chars_ptr;
-                         screen      : access xcbada_xproto.xcb_screen_t)
-                         return xcb_connection_t;
-   pragma Import (C, xcb_connect, "xcb_connect");
+   function connect (displayname : ICS.chars_ptr;
+                     screen      : access xcbada_xproto.xcb_screen_t)
+      return xcb_connection_t;
+   pragma Import (C, connect, "xcb_connect");
 
    --  Test whether the connection has shut down due to a fatal error
-   function xcb_connection_has_error (c : xcb_connection_t)
+   function connection_has_error (c : xcb_connection_t)
       return Integer;
-   pragma Import (C, xcb_connection_has_error, "xcb_connection_has_error");
+   pragma Import (C, connection_has_error, "xcb_connection_has_error");
 
    --  Forces any buffered output to be written to the server
-   function xcb_flush (connection : xcb_connection_t) return Integer;
-   pragma Import (C, xcb_flush, "xcb_flush");
+   function flush (connection : xcb_connection_t) return Integer;
+   pragma Import (C, flush, "xcb_flush");
 
    --  Caches reply information from QueryExtension requests.
-   function xcb_get_extension_data (connection: xcb_connection_t;
-                                    extension : xcb_extension_t)
+   function get_extension_data (connection: xcb_connection_t;
+                                extension : xcb_extension_t)
       return access xcbada_xproto.xcb_query_extension_reply_t;
-   pragma Import (C, xcb_get_extension_data, "xcb_get_extension_data");
+   pragma Import (C, get_extension_data, "xcb_get_extension_data");
 
    --  Access the data returned by the server
-   function xcb_get_setup (connection : xcb_connection_t)
+   function get_setup (connection : xcb_connection_t)
       return access xcbada_xproto.xcb_setup_t;
-   pragma Import (C, xcb_get_setup, "xcb_get_setup");
+   pragma Import (C, get_setup, "xcb_get_setup");
 
    --  Returns the next event or error from the server
-   function xcb_wait_for_event (connection : xcb_connection_t)
+   function wait_for_event (connection : xcb_connection_t)
       return xcb_generic_event_t_p;
-   pragma Import (C, xcb_wait_for_event, "xcb_wait_for_event");
+   pragma Import (C, wait_for_event, "xcb_wait_for_event");
 end xcb;
