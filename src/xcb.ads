@@ -8,10 +8,10 @@ package xcb is
    package IC renames Interfaces.C;
    package ICS renames IC.Strings;
    pragma Linker_Options ("-lxcb");
-   type xcb_screen_t_ptr is access all xcbada_xproto.xcb_screen_t;
+   type xcb_screen_t_p is access all xcbada_xproto.xcb_screen_t;
 
    Null_Display : constant ICS.chars_ptr := ICS.Null_Ptr;
-   Null_Screen : constant xcb_screen_t_ptr := null;
+   Null_Screen : constant xcb_screen_t_p := null;
    NO_SYMBOL : constant Interfaces.Unsigned_8 := 0;
    XCB_NONE : constant Interfaces.Unsigned_32 := 0;
    XCB_CURRENT_TIME : constant Interfaces.Unsigned_32 := 0;
