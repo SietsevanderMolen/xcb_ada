@@ -51,6 +51,18 @@ package xcb is
    type xcb_generic_event_t_p is access all xcb_generic_event_t;
    pragma Convention (C, xcb_generic_event_t);
 
+  -- * @brief Generic iterator.
+  -- * A generic iterator structure.
+  --*< Data of the current iterator  
+  --*< remaining elements  
+  --*< index of the current iterator  
+   type xcb_generic_iterator_t is record
+      data : System.Address;
+      c_rem : aliased Integer;
+      index : aliased Integer;
+   end record;
+   pragma Convention (C_Pass_By_Copy, xcb_generic_iterator_t);
+
    type xcb_void_cookie_t is record
       sequence : aliased Integer;
    end record;
