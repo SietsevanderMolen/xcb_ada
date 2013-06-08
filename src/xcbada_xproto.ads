@@ -107,6 +107,24 @@ package xcbada_xproto is
       XCB_NOTIFY_MODE_WHILE_GRABBED);
    pragma Convention (C, xcb_notify_mode_t);
 
+   type xcb_enter_notify_event_t is record
+      response_type     : aliased Interfaces.Unsigned_8;
+      detail            : aliased Interfaces.Unsigned_8;
+      sequence          : aliased Interfaces.Unsigned_16;
+      time              : aliased xcb_timestamp_t;
+      root              : aliased xcb_window_t;
+      event             : aliased xcb_window_t;
+      child             : aliased xcb_window_t;
+      root_x            : aliased Interfaces.Unsigned_16;
+      root_y            : aliased Interfaces.Unsigned_16;
+      event_x           : aliased Interfaces.Unsigned_16;
+      event_y           : aliased Interfaces.Unsigned_16;
+      state             : aliased Interfaces.Unsigned_16;
+      mode              : aliased Interfaces.Unsigned_8;
+      same_screen_focus : aliased Interfaces.Unsigned_8;
+   end record;
+   pragma Convention (C_Pass_By_Copy, xcb_enter_notify_event_t);
+
    subtype xcb_cw_t is Interfaces.Unsigned_16;
    XCB_CW_BACK_PIXMAP       : constant xcb_cw_t := 1;
    XCB_CW_BACK_PIXEL        : constant xcb_cw_t := 2;
