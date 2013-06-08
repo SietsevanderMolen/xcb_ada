@@ -125,6 +125,17 @@ package xcbada_xproto is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_enter_notify_event_t);
 
+   subtype xcb_leave_notify_event_t is xcb_enter_notify_event_t;
+
+   type xcb_focus_in_event_t is record
+      response_type : aliased Interfaces.Unsigned_8;
+      detail        : aliased Interfaces.Unsigned_8;
+      sequence      : aliased Interfaces.Unsigned_16;
+      event         : aliased xcb_window_t;
+      mode          : aliased Interfaces.Unsigned_8;
+   end record;
+   pragma Convention (C_Pass_By_Copy, xcb_focus_in_event_t);
+
    subtype xcb_cw_t is Interfaces.Unsigned_16;
    XCB_CW_BACK_PIXMAP       : constant xcb_cw_t := 1;
    XCB_CW_BACK_PIXEL        : constant xcb_cw_t := 2;
