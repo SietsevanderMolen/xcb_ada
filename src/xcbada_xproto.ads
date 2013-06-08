@@ -1786,22 +1786,22 @@ package xcbada_xproto is
    pragma Convention (C_Pass_By_Copy, xcb_query_font_request_t);
 
    type xcb_query_font_reply_t is record
-      response_type : aliased Interfaces.Unsigned_8;
-      sequence : aliased Interfaces.Unsigned_16;
-      length : aliased Interfaces.Unsigned_32;
-      min_bounds : aliased xcb_charinfo_t;
-      max_bounds : aliased xcb_charinfo_t;
+      response_type     : aliased Interfaces.Unsigned_8;
+      sequence          : aliased Interfaces.Unsigned_16;
+      length            : aliased Interfaces.Unsigned_32;
+      min_bounds        : aliased xcb_charinfo_t;
+      max_bounds        : aliased xcb_charinfo_t;
       min_char_or_byte2 : aliased Interfaces.Unsigned_16;
       max_char_or_byte2 : aliased Interfaces.Unsigned_16;
-      default_char : aliased Interfaces.Unsigned_16;
-      properties_len : aliased Interfaces.Unsigned_16;
-      draw_direction : aliased Interfaces.Unsigned_8;
-      min_byte1 : aliased Interfaces.Unsigned_8;
-      max_byte1 : aliased Interfaces.Unsigned_8;
-      all_chars_exist : aliased Interfaces.Unsigned_8;
-      font_ascent : aliased Interfaces.Unsigned_16;
-      font_descent : aliased Interfaces.Unsigned_16;
-      char_infos_len : aliased Interfaces.Unsigned_32;
+      default_char      : aliased Interfaces.Unsigned_16;
+      properties_len    : aliased Interfaces.Unsigned_16;
+      draw_direction    : aliased Interfaces.Unsigned_8;
+      min_byte1         : aliased Interfaces.Unsigned_8;
+      max_byte1         : aliased Interfaces.Unsigned_8;
+      all_chars_exist   : aliased Interfaces.Unsigned_8;
+      font_ascent       : aliased Interfaces.Unsigned_16;
+      font_descent      : aliased Interfaces.Unsigned_16;
+      char_infos_len    : aliased Interfaces.Unsigned_32;
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_query_font_reply_t);
 
@@ -3758,15 +3758,15 @@ package xcbada_xproto is
    pragma Import (C, xcb_send_event, "xcb_send_event");
 
    function xcb_grab_pointer
-     (arg1 : System.Address;
-      arg2 : Interfaces.Unsigned_8;
-      arg3 : xcb_window_t;
-      arg4 : Interfaces.Unsigned_16;
-      arg5 : Interfaces.Unsigned_8;
-      arg6 : Interfaces.Unsigned_8;
-      arg7 : xcb_window_t;
-      arg8 : xcb_cursor_t;
-      arg9 : xcb_timestamp_t) return xcb_grab_pointer_cookie_t;
+     (connection    : xcb.xcb_connection_t;
+      owner_events  : Interfaces.Unsigned_8;
+      grab_window   : xcb_window_t;
+      event_mask    : Interfaces.Unsigned_32;
+      pointer_mode  : xcb_grab_mode_t;
+      keyboard_mode : xcb_grab_mode_t;
+      confine_to    : xcb_window_t;
+      cursor        : xcb_cursor_t;
+      time          : xcb_timestamp_t) return xcb_grab_pointer_cookie_t;
    pragma Import (C, xcb_grab_pointer, "xcb_grab_pointer");
 
    function xcb_grab_pointer_unchecked
@@ -3794,16 +3794,16 @@ package xcbada_xproto is
    pragma Import (C, xcb_ungrab_pointer, "xcb_ungrab_pointer");
 
    function xcb_grab_button_checked
-     (arg1 : System.Address;
-      arg2 : Interfaces.Unsigned_8;
-      arg3 : xcb_window_t;
-      arg4 : Interfaces.Unsigned_32;
-      arg5 : xcb_grab_mode_t;
-      arg6 : Interfaces.Unsigned_8;
-      arg7 : xcb_window_t;
-      arg8 : xcb_cursor_t;
-      arg9 : Interfaces.Unsigned_8;
-      arg10 : Interfaces.Unsigned_16) return xcb.xcb_void_cookie_t;
+     (connection    : xcb.xcb_connection_t;
+      owner_events  : Interfaces.Unsigned_8;
+      grab_window   : xcb_window_t;
+      event_mask    : Interfaces.Unsigned_32;
+      pointer_mode  : xcb_grab_mode_t;
+      keyboard_mode : xcb_grab_mode_t;
+      confine_to    : xcb_window_t;
+      cursor        : xcb_cursor_t;
+      button        : Interfaces.Unsigned_8;
+      modifiers     : Interfaces.Unsigned_16) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_grab_button_checked, "xcb_grab_button_checked");
 
    function xcb_grab_button
@@ -3888,13 +3888,13 @@ package xcbada_xproto is
    pragma Import (C, xcb_grab_key_checked, "xcb_grab_key_checked");
 
    function xcb_grab_key
-     (arg1 : System.Address;
-      arg2 : Interfaces.Unsigned_8;
-      arg3 : xcb_window_t;
-      arg4 : Interfaces.Unsigned_16;
-      arg5 : xcb_keycode_t;
-      arg6 : Interfaces.Unsigned_8;
-      arg7 : Interfaces.Unsigned_8) return xcb.xcb_void_cookie_t;
+     (c             : xcb.xcb_connection_t;
+      owner_events  : Interfaces.Unsigned_8;
+      grab_window   : xcb_window_t;
+      modifiers     : Interfaces.Unsigned_16;
+      key           : xcb_keycode_t;
+      pointer_mode  : xcb_grab_mode_t;
+      keyboard_mode : xcb_grab_mode_t) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_grab_key, "xcb_grab_key");
 
    function xcb_ungrab_key_checked
@@ -3935,10 +3935,10 @@ package xcbada_xproto is
    function xcb_ungrab_server (arg1 : System.Address) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_ungrab_server, "xcb_ungrab_server");
 
-   function xcb_query_pointer (arg1 : System.Address; arg2 : xcb_window_t) return xcb_query_pointer_cookie_t;
+   function xcb_query_pointer (c : xcb.xcb_connection_t; arg2 : xcb_window_t) return xcb_query_pointer_cookie_t;
    pragma Import (C, xcb_query_pointer, "xcb_query_pointer");
 
-   function xcb_query_pointer_unchecked (arg1 : System.Address; arg2 : xcb_window_t) return xcb_query_pointer_cookie_t;
+   function xcb_query_pointer_unchecked (c : xcb.xcb_connection_t; arg2 : xcb_window_t) return xcb_query_pointer_cookie_t;
    pragma Import (C, xcb_query_pointer_unchecked, "xcb_query_pointer_unchecked");
 
    function xcb_query_pointer_reply
