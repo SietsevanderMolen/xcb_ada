@@ -89,6 +89,24 @@ package xcbada_xproto is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_motion_notify_event_t);
 
+   type xcb_notify_detail_t is 
+     (XCB_NOTIFY_DETAIL_ANCESTOR,
+      XCB_NOTIFY_DETAIL_VIRTUAL,
+      XCB_NOTIFY_DETAIL_INFERIOR,
+      XCB_NOTIFY_DETAIL_NONLINEAR,
+      XCB_NOTIFY_DETAIL_NONLINEAR_VIRTUAL,
+      XCB_NOTIFY_DETAIL_POINTER,
+      XCB_NOTIFY_DETAIL_POINTER_ROOT,
+      XCB_NOTIFY_DETAIL_NONE);
+   pragma Convention (C, xcb_notify_detail_t);
+
+   type xcb_notify_mode_t is 
+     (XCB_NOTIFY_MODE_NORMAL,
+      XCB_NOTIFY_MODE_GRAB,
+      XCB_NOTIFY_MODE_UNGRAB,
+      XCB_NOTIFY_MODE_WHILE_GRABBED);
+   pragma Convention (C, xcb_notify_mode_t);
+
    subtype xcb_cw_t is Interfaces.Unsigned_16;
    XCB_CW_BACK_PIXMAP       : constant xcb_cw_t := 1;
    XCB_CW_BACK_PIXEL        : constant xcb_cw_t := 2;
