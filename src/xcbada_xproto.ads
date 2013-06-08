@@ -65,6 +65,12 @@ package xcbada_xproto is
    function Convert is new Ada.Unchecked_Conversion (Source => xcb.xcb_generic_event_t_p,
                                                      Target => xcb_button_press_event_t_p);
 
+   subtype xcb_button_release_event_t is xcb_button_press_event_t;
+   type xcb_motion_t is 
+      (XCB_MOTION_NORMAL,
+      XCB_MOTION_HINT);
+   pragma Convention (C, xcb_motion_t);
+
    subtype xcb_cw_t is Interfaces.Unsigned_16;
    XCB_CW_BACK_PIXMAP       : constant xcb_cw_t := 1;
    XCB_CW_BACK_PIXEL        : constant xcb_cw_t := 2;
