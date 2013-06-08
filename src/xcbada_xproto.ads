@@ -1,9 +1,14 @@
 with System,
-     Interfaces;
+     Interfaces,
+     Interfaces.C,
+     Interfaces.C.Strings;
 with xcb;
 with Ada.Unchecked_Conversion;
 
 package xcbada_xproto is
+   package IC renames Interfaces.C;
+   package ICS renames IC.Strings;
+
    type xcb_char2b_t is record
       byte1 : aliased Interfaces.Unsigned_8;
       byte2 : aliased Interfaces.Unsigned_8;
@@ -1373,7 +1378,7 @@ package xcbada_xproto is
       XCB_SEND_EVENT_DEST_ITEM_FOCUS);
    pragma Convention (C, xcb_send_event_dest_t);
 
-   subtype events_array_t is String (1 .. 32);
+   type events_array_t is array (1 .. 32) of ICS.chars_ptr;
    type xcb_send_event_request_t is record
       major_opcode : aliased Interfaces.Unsigned_8;
       propagate : aliased Interfaces.Unsigned_8;
@@ -3259,7 +3264,7 @@ package xcbada_xproto is
    function xcb_setup_request_sizeof (arg1 : System.Address) return Integer;
    pragma Import (C, xcb_setup_request_sizeof, "xcb_setup_request_sizeof");
 
-   function xcb_setup_request_authorization_protocol_name (arg1 : System.Address) return String;
+   function xcb_setup_request_authorization_protocol_name (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_setup_request_authorization_protocol_name, "xcb_setup_request_authorization_protocol_name");
 
    function xcb_setup_request_authorization_protocol_name_length (arg1 : System.Address) return Integer;
@@ -3268,7 +3273,7 @@ package xcbada_xproto is
    function xcb_setup_request_authorization_protocol_name_end (arg1 : System.Address) return xcb.xcb_generic_iterator_t;
    pragma Import (C, xcb_setup_request_authorization_protocol_name_end, "xcb_setup_request_authorization_protocol_name_end");
 
-   function xcb_setup_request_authorization_protocol_data (arg1 : System.Address) return String;
+   function xcb_setup_request_authorization_protocol_data (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_setup_request_authorization_protocol_data, "xcb_setup_request_authorization_protocol_data");
 
    function xcb_setup_request_authorization_protocol_data_length (arg1 : System.Address) return Integer;
@@ -3286,7 +3291,7 @@ package xcbada_xproto is
    function xcb_setup_failed_sizeof (arg1 : System.Address) return Integer;
    pragma Import (C, xcb_setup_failed_sizeof, "xcb_setup_failed_sizeof");
 
-   function xcb_setup_failed_reason (arg1 : System.Address) return String;
+   function xcb_setup_failed_reason (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_setup_failed_reason, "xcb_setup_failed_reason");
 
    function xcb_setup_failed_reason_length (arg1 : System.Address) return Integer;
@@ -3304,7 +3309,7 @@ package xcbada_xproto is
    function xcb_setup_authenticate_sizeof (arg1 : System.Address) return Integer;
    pragma Import (C, xcb_setup_authenticate_sizeof, "xcb_setup_authenticate_sizeof");
 
-   function xcb_setup_authenticate_reason (arg1 : System.Address) return String;
+   function xcb_setup_authenticate_reason (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_setup_authenticate_reason, "xcb_setup_authenticate_reason");
 
    function xcb_setup_authenticate_reason_length (arg1 : System.Address) return Integer;
@@ -3322,7 +3327,7 @@ package xcbada_xproto is
    function xcb_setup_sizeof (arg1 : System.Address) return Integer;
    pragma Import (C, xcb_setup_sizeof, "xcb_setup_sizeof");
 
-   function xcb_setup_vendor (arg1 : System.Address) return String;
+   function xcb_setup_vendor (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_setup_vendor, "xcb_setup_vendor");
 
    function xcb_setup_vendor_length (arg1 : System.Address) return Integer;
@@ -3558,14 +3563,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_8;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_intern_atom_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_intern_atom_cookie_t;
    pragma Import (C, xcb_intern_atom, "xcb_intern_atom");
 
    function xcb_intern_atom_unchecked
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_8;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_intern_atom_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_intern_atom_cookie_t;
    pragma Import (C, xcb_intern_atom_unchecked, "xcb_intern_atom_unchecked");
 
    function xcb_intern_atom_reply
@@ -3583,7 +3588,7 @@ package xcbada_xproto is
    function xcb_get_atom_name_unchecked (arg1 : System.Address; arg2 : xcb_atom_t) return xcb_get_atom_name_cookie_t;
    pragma Import (C, xcb_get_atom_name_unchecked, "xcb_get_atom_name_unchecked");
 
-   function xcb_get_atom_name_name (arg1 : System.Address) return String;
+   function xcb_get_atom_name_name (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_get_atom_name_name, "xcb_get_atom_name_name");
 
    function xcb_get_atom_name_name_length (arg1 : System.Address) return Integer;
@@ -3746,7 +3751,7 @@ package xcbada_xproto is
       arg2 : Interfaces.Unsigned_8;
       arg3 : xcb_window_t;
       arg4 : Interfaces.Unsigned_32;
-      arg5 : String) return xcb.xcb_void_cookie_t;
+      arg5 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_send_event_checked, "xcb_send_event_checked");
 
    function xcb_send_event
@@ -3754,7 +3759,7 @@ package xcbada_xproto is
       arg2 : Interfaces.Unsigned_8;
       arg3 : xcb_window_t;
       arg4 : Interfaces.Unsigned_32;
-      arg5 : String) return xcb.xcb_void_cookie_t;
+      arg5 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_send_event, "xcb_send_event");
 
    function xcb_grab_pointer
@@ -4076,14 +4081,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : xcb_font_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb.xcb_void_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_open_font_checked, "xcb_open_font_checked");
 
    function xcb_open_font
      (arg1 : System.Address;
       arg2 : xcb_font_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb.xcb_void_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_open_font, "xcb_open_font");
 
    function xcb_close_font_checked (arg1 : System.Address; arg2 : xcb_font_t) return xcb.xcb_void_cookie_t;
@@ -4163,7 +4168,7 @@ package xcbada_xproto is
    function xcb_str_sizeof (arg1 : System.Address) return Integer;
    pragma Import (C, xcb_str_sizeof, "xcb_str_sizeof");
 
-   function xcb_str_name (arg1 : System.Address) return String;
+   function xcb_str_name (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_str_name, "xcb_str_name");
 
    function xcb_str_name_length (arg1 : System.Address) return Integer;
@@ -4185,14 +4190,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_list_fonts_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_list_fonts_cookie_t;
    pragma Import (C, xcb_list_fonts, "xcb_list_fonts");
 
    function xcb_list_fonts_unchecked
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_list_fonts_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_list_fonts_cookie_t;
    pragma Import (C, xcb_list_fonts_unchecked, "xcb_list_fonts_unchecked");
 
    function xcb_list_fonts_names_length (arg1 : System.Address) return Integer;
@@ -4214,14 +4219,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_list_fonts_with_info_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_list_fonts_with_info_cookie_t;
    pragma Import (C, xcb_list_fonts_with_info, "xcb_list_fonts_with_info");
 
    function xcb_list_fonts_with_info_unchecked
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_list_fonts_with_info_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_list_fonts_with_info_cookie_t;
    pragma Import (C, xcb_list_fonts_with_info_unchecked, "xcb_list_fonts_with_info_unchecked");
 
    function xcb_list_fonts_with_info_properties (arg1 : System.Address) return access xcb_fontprop_t;
@@ -4233,7 +4238,7 @@ package xcbada_xproto is
    function xcb_list_fonts_with_info_properties_iterator (arg1 : System.Address) return xcb_fontprop_iterator_t;
    pragma Import (C, xcb_list_fonts_with_info_properties_iterator, "xcb_list_fonts_with_info_properties_iterator");
 
-   function xcb_list_fonts_with_info_name (arg1 : System.Address) return String;
+   function xcb_list_fonts_with_info_name (arg1 : System.Address) return ICS.chars_ptr;
    pragma Import (C, xcb_list_fonts_with_info_name, "xcb_list_fonts_with_info_name");
 
    function xcb_list_fonts_with_info_name_length (arg1 : System.Address) return Integer;
@@ -4775,7 +4780,7 @@ package xcbada_xproto is
       arg4 : xcb_gcontext_t;
       arg5 : Interfaces.Unsigned_16;
       arg6 : Interfaces.Unsigned_16;
-      arg7 : String) return xcb.xcb_void_cookie_t;
+      arg7 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_image_text_8_checked, "xcb_image_text_8_checked");
 
    function xcb_image_text_8
@@ -4785,7 +4790,7 @@ package xcbada_xproto is
       arg4 : xcb_gcontext_t;
       arg5 : Interfaces.Unsigned_16;
       arg6 : Interfaces.Unsigned_16;
-      arg7 : String) return xcb.xcb_void_cookie_t;
+      arg7 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_image_text_8, "xcb_image_text_8");
 
    function xcb_image_text_16_sizeof (arg1 : System.Address) return Integer;
@@ -4910,14 +4915,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : xcb_colormap_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_alloc_named_color_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_alloc_named_color_cookie_t;
    pragma Import (C, xcb_alloc_named_color, "xcb_alloc_named_color");
 
    function xcb_alloc_named_color_unchecked
      (arg1 : System.Address;
       arg2 : xcb_colormap_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_alloc_named_color_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_alloc_named_color_cookie_t;
    pragma Import (C, xcb_alloc_named_color_unchecked, "xcb_alloc_named_color_unchecked");
 
    function xcb_alloc_named_color_reply
@@ -5058,7 +5063,7 @@ package xcbada_xproto is
       arg3 : xcb_colormap_t;
       arg4 : Interfaces.Unsigned_32;
       arg5 : Interfaces.Unsigned_16;
-      arg6 : String) return xcb.xcb_void_cookie_t;
+      arg6 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_store_named_color_checked, "xcb_store_named_color_checked");
 
    function xcb_store_named_color
@@ -5067,7 +5072,7 @@ package xcbada_xproto is
       arg3 : xcb_colormap_t;
       arg4 : Interfaces.Unsigned_32;
       arg5 : Interfaces.Unsigned_16;
-      arg6 : String) return xcb.xcb_void_cookie_t;
+      arg6 : ICS.chars_ptr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_store_named_color, "xcb_store_named_color");
 
    procedure xcb_rgb_next (arg1 : access xcb_rgb_iterator_t);
@@ -5115,14 +5120,14 @@ package xcbada_xproto is
      (arg1 : System.Address;
       arg2 : xcb_colormap_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_lookup_color_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_lookup_color_cookie_t;
    pragma Import (C, xcb_lookup_color, "xcb_lookup_color");
 
    function xcb_lookup_color_unchecked
      (arg1 : System.Address;
       arg2 : xcb_colormap_t;
       arg3 : Interfaces.Unsigned_16;
-      arg4 : String) return xcb_lookup_color_cookie_t;
+      arg4 : ICS.chars_ptr) return xcb_lookup_color_cookie_t;
    pragma Import (C, xcb_lookup_color_unchecked, "xcb_lookup_color_unchecked");
 
    function xcb_lookup_color_reply
@@ -5247,13 +5252,13 @@ package xcbada_xproto is
    function xcb_query_extension
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
-      arg3 : String) return xcb_query_extension_cookie_t;
+      arg3 : ICS.chars_ptr) return xcb_query_extension_cookie_t;
    pragma Import (C, xcb_query_extension, "xcb_query_extension");
 
    function xcb_query_extension_unchecked
      (arg1 : System.Address;
       arg2 : Interfaces.Unsigned_16;
-      arg3 : String) return xcb_query_extension_cookie_t;
+      arg3 : ICS.chars_ptr) return xcb_query_extension_cookie_t;
    pragma Import (C, xcb_query_extension_unchecked, "xcb_query_extension_unchecked");
 
    function xcb_query_extension_reply
