@@ -1213,6 +1213,7 @@ package xcbada_xproto is
       children_len : aliased Interfaces.Unsigned_16;
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_query_tree_reply_t);
+   type xcb_query_tree_reply_t_p is access all xcb_query_tree_reply_t;
 
    type xcb_intern_atom_cookie_t is record
       sequence : aliased Interfaces.Unsigned_8;
@@ -3541,19 +3542,19 @@ package xcbada_xproto is
    function xcb_query_tree_unchecked (arg1 : System.Address; arg2 : xcb_window_t) return xcb_query_tree_cookie_t;
    pragma Import (C, xcb_query_tree_unchecked, "xcb_query_tree_unchecked");
 
-   function xcb_query_tree_children (arg1 : System.Address) return access xcb_window_t;
+   function xcb_query_tree_children (reply : xcb_query_tree_reply_t) return access xcb_window_t;
    pragma Import (C, xcb_query_tree_children, "xcb_query_tree_children");
 
-   function xcb_query_tree_children_length (arg1 : System.Address) return Integer;
+   function xcb_query_tree_children_length (reply : xcb_query_tree_reply_t) return Integer;
    pragma Import (C, xcb_query_tree_children_length, "xcb_query_tree_children_length");
 
-   function xcb_query_tree_children_end (arg1 : System.Address) return xcb.xcb_generic_iterator_t;
+   function xcb_query_tree_children_end (reply : xcb_query_tree_reply_t) return xcb.xcb_generic_iterator_t;
    pragma Import (C, xcb_query_tree_children_end, "xcb_query_tree_children_end");
 
    function xcb_query_tree_reply
      (arg1 : System.Address;
       arg2 : xcb_query_tree_cookie_t;
-      arg3 : System.Address) return access xcb_query_tree_reply_t;
+      arg3 : System.Address) return xcb_query_tree_reply_t_p;
    pragma Import (C, xcb_query_tree_reply, "xcb_query_tree_reply");
 
    function xcb_intern_atom_sizeof (arg1 : System.Address) return Integer;
