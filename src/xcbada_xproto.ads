@@ -23,6 +23,11 @@ package xcbada_xproto is
    pragma Convention (C_Pass_By_Copy, xcb_char2b_iterator_t);
 
    subtype xcb_window_t is Interfaces.Unsigned_32;
+   type xcb_window_t_p is access all xcb_window_t;
+
+   type xcb_window_t_arr is array (Integer range <>) of xcb_window_t;
+   pragma Convention (C, xcb_window_t_arr);
+   for xcb_window_t_arr'Component_Size use xcb_window_t'Size;
 
    type xcb_window_iterator_t is record
       data  : access xcb_window_t;
@@ -3533,16 +3538,16 @@ package xcbada_xproto is
       arg3 : System.Address) return access xcb_get_geometry_reply_t;
    pragma Import (C, xcb_get_geometry_reply, "xcb_get_geometry_reply");
 
-   function xcb_query_tree_sizeof (arg1 : System.Address) return Integer;
+   function xcb_query_tree_sizeof (reply : xcb_query_tree_reply_t) return Integer;
    pragma Import (C, xcb_query_tree_sizeof, "xcb_query_tree_sizeof");
 
-   function xcb_query_tree (arg1 : System.Address; arg2 : xcb_window_t) return xcb_query_tree_cookie_t;
+   function xcb_query_tree (con : xcb.xcb_connection_t; arg2 : xcb_window_t) return xcb_query_tree_cookie_t;
    pragma Import (C, xcb_query_tree, "xcb_query_tree");
 
    function xcb_query_tree_unchecked (arg1 : System.Address; arg2 : xcb_window_t) return xcb_query_tree_cookie_t;
    pragma Import (C, xcb_query_tree_unchecked, "xcb_query_tree_unchecked");
 
-   function xcb_query_tree_children (reply : xcb_query_tree_reply_t) return access xcb_window_t;
+   function xcb_query_tree_children (reply : xcb_query_tree_reply_t) return xcb_window_t_arr;
    pragma Import (C, xcb_query_tree_children, "xcb_query_tree_children");
 
    function xcb_query_tree_children_length (reply : xcb_query_tree_reply_t) return Integer;
