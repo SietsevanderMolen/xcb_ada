@@ -39,13 +39,9 @@ package xcb is
    type xcb_generic_error_t_p is access all xcb_generic_error_t;
    pragma Convention (C, xcb_generic_error_t);
 
-   type xcb_generic_event_t_pad_array is array (0 .. 6) of 
-      aliased Interfaces.Unsigned_32;
    type xcb_generic_event_t is record
       response_type : aliased Interfaces.Unsigned_8;
-      pad0          : aliased Interfaces.Unsigned_8;
       sequence      : aliased Interfaces.Unsigned_16;
-      pad           : aliased xcb_generic_event_t_pad_array;
       full_sequence : aliased Interfaces.Unsigned_32;
    end record;
    type xcb_generic_event_t_p is access all xcb_generic_event_t;
@@ -98,4 +94,9 @@ package xcb is
    function wait_for_event (connection : xcb_connection_t)
       return xcb_generic_event_t_p;
    pragma Import (C, wait_for_event, "xcb_wait_for_event");
+
+   --  Returns the next event or error from the server
+   function poll_for_event (connection : xcb_connection_t)
+      return xcb_generic_event_t_p;
+   pragma Import (C, poll_for_event, "xcb_poll_for_event");
 end xcb;
