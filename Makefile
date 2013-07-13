@@ -1,31 +1,19 @@
 LIBNAME = xcbada
 
-.POSIX:
-INSTALL = /usr/bin/install -c
-PREFIX = /usr/local
-
 all: $(LIBNAME)
 
-# -----------------------------------
-# Create a xcbada library for objects
-# -----------------------------------
-# 
-xcbada:
-	gprbuild -p xcbada.gpr
+$(LIBNAME):
+	gprbuild -p $(LIBNAME).gpr
 
 # -----------------------------------
 # Maintenance targets
 # -----------------------------------
 #
-# remove editor and compiler generated files
 clean:
-	gprclean xcbada.gpr
-
-# install xcbada
+	gprclean $(LIBNAME).gpr
 install:
-	gprinstall -f -p -P xcbada.gpr
-
+	gprinstall -f -p -P $(LIBNAME).gpr
 uninstall:
-	gprinstall --uninstall  -P xcbada.gpr
+	gprinstall --uninstall  -P $(LIBNAME).gpr
 
 .PHONY: install uninstall clean
