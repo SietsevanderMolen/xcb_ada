@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 --                                                                           --
---                   Copyright (C) 2012-, Sietse van der Molen		     --
+--                   Copyright (C) 2012-, Sietse van der Molen               --
 --                                                                           --
---    This file is part of XCB_Ada.		 	   	             --
---									     --
+--    This file is part of XCB_Ada.                                          --
+--                                                                           --
 --    XCB_Ada is free software: you can redistribute it and/or modify        --
 --    it under the terms of the GNU General Public License as published by   --
 --    the Free Software Foundation, either version 3 of the License, or      --
 --    (at your option) any later version.                                    --
---   		 		 	 	 	 	 	     --
+--                                                                           --
 --    XCB_Ada is distributed in the hope that it will be useful,             --
 --    but WITHOUT ANY WARRANTY; without even the implied warranty of         --
 --    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          --
@@ -121,3 +121,4 @@ package xcb is
       return xcb_generic_event_t_p;
    pragma Import (C, poll_for_event, "xcb_poll_for_event");
 end xcb;
+--  vim:ts=3:expandtab:tw=80
