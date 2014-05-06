@@ -30,6 +30,40 @@ package xcbada_xproto is
    package IC renames Interfaces.C;
    package ICS renames IC.Strings;
 
+   XCB_KEY_PRESS : CONSTANT Integer := 2;
+   XCB_KEY_RELEASE : CONSTANT Integer := 3;
+   XCB_BUTTON_PRESS : CONSTANT Integer := 4;
+   XCB_BUTTON_RELEASE : CONSTANT Integer := 5;
+   XCB_MOTION_NOTIFY : CONSTANT Integer := 6;
+   XCB_ENTER_NOTIFY : CONSTANT Integer := 7;
+   XCB_LEAVE_NOTIFY : CONSTANT Integer := 8;
+   XCB_FOCUS_IN : CONSTANT Integer := 9;
+   XCB_FOCUS_OUT : CONSTANT Integer := 10;
+   XCB_KEYMAP_NOTIFY : CONSTANT Integer := 11;
+   XCB_EXPOSE : CONSTANT Integer := 12;
+   XCB_GRAPHICS_EXPOSURE : CONSTANT Integer := 13;
+   XCB_NO_EXPOSURE : CONSTANT Integer := 14;
+   XCB_VISIBILITY_NOTIFY : CONSTANT Integer := 15;
+   XCB_CREATE_NOTIFY : CONSTANT Integer := 16;
+   XCB_DESTROY_NOTIFY : CONSTANT Integer := 17;
+   XCB_UNMAP_NOTIFY : CONSTANT Integer := 18;
+   XCB_MAP_NOTIFY : CONSTANT Integer := 19;
+   XCB_MAP_REQUEST : CONSTANT Integer := 20;
+   XCB_REPARENT_NOTIFY : CONSTANT Integer := 21;
+   XCB_CONFIGURE_NOTIFY : CONSTANT Integer := 22;
+   XCB_CONFIGURE_REQUEST : CONSTANT Integer := 23;
+   XCB_GRAVITY_NOTIFY : CONSTANT Integer := 24;
+   XCB_RESIZE_REQUEST : CONSTANT Integer := 25;
+   XCB_CIRCULATE_NOTIFY : CONSTANT Integer := 26;
+   XCB_CIRCULATE_REQUEST : CONSTANT Integer := 27;
+   XCB_PROPERTY_NOTIFY : CONSTANT Integer := 28;
+   XCB_SELECTION_CLEAR : CONSTANT Integer := 29;
+   XCB_SELECTION_REQUEST : CONSTANT Integer := 30;
+   XCB_SELECTION_NOTIFY : CONSTANT Integer := 31;
+   XCB_COLORMAP_NOTIFY : CONSTANT Integer := 32;
+   XCB_CLIENT_MESSAGE : CONSTANT Integer := 33;
+   XCB_MAPPING_NOTIFY : CONSTANT Integer := 34;
+
    type xcb_char2b_t is record
       byte1 : aliased Interfaces.Unsigned_8;
       byte2 : aliased Interfaces.Unsigned_8;
@@ -485,6 +519,7 @@ package xcbada_xproto is
       state : aliased Interfaces.Unsigned_16;
       same_screen : aliased Interfaces.Unsigned_8;
    end record;
+   type xcb_button_press_event_t_p is access all xcb_button_press_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_button_press_event_t);
 
    subtype xcb_button_release_event_t is xcb_button_press_event_t;
