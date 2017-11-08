@@ -10,7 +10,6 @@ project xcbada is
 
    package Install is
       for Active use "true";
-      for Prefix use "/usr/local/";
    end Install;
 
    for Library_Name use "xcbada";
