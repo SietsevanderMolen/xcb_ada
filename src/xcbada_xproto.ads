@@ -518,6 +518,7 @@ package xcbada_xproto is
       event_y : aliased Interfaces.Unsigned_16;
       state : aliased Interfaces.Unsigned_16;
       same_screen : aliased Interfaces.Unsigned_8;
+      pad0 : aliased Interfaces.Unsigned_8;
    end record;
    type xcb_button_press_event_t_p is access all xcb_button_press_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_button_press_event_t);
