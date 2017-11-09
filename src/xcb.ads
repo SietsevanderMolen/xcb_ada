@@ -29,6 +29,11 @@ package xcb is
    package IC renames Interfaces.C;
    package ICS renames IC.Strings;
    pragma Linker_Options ("-lxcb");
+
+   type xcb_unsigned32_arr is array (Integer range <>) of Interfaces.Unsigned_32;
+   pragma Convention (C, xcb_unsigned32_arr);
+   for xcb_unsigned32_arr'Component_Size use Interfaces.Unsigned_32'Size;
+
    type xcb_screen_t_p is access all xcbada_xproto.xcb_screen_t;
 
    Null_Display : constant ICS.chars_ptr := ICS.Null_Ptr;
@@ -62,7 +67,9 @@ package xcb is
 
    type xcb_generic_event_t is record
       response_type : aliased Interfaces.Unsigned_8;
+      pad0          : aliased Interfaces.Unsigned_8;
       sequence      : aliased Interfaces.Unsigned_16;
+      pad1          : aliased xcb_unsigned32_arr (0 .. 6);
       full_sequence : aliased Interfaces.Unsigned_32;
    end record;
    type xcb_generic_event_t_p is access all xcb_generic_event_t;

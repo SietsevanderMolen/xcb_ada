@@ -697,6 +697,7 @@ package xcbada_xproto is
       parent : aliased xcb_window_t;
       window : aliased xcb_window_t;
    end record;
+   type xcb_map_request_event_t_p is access all xcb_map_request_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_map_request_event_t);
 
    type xcb_reparent_notify_event_t is record
@@ -733,13 +734,14 @@ package xcbada_xproto is
       parent : aliased xcb_window_t;
       window : aliased xcb_window_t;
       sibling : aliased xcb_window_t;
-      x : aliased Interfaces.Unsigned_16;
-      y : aliased Interfaces.Unsigned_16;
+      x : aliased Interfaces.Integer_16;
+      y : aliased Interfaces.Integer_16;
       width : aliased Interfaces.Unsigned_16;
       height : aliased Interfaces.Unsigned_16;
       border_width : aliased Interfaces.Unsigned_16;
       value_mask : aliased Interfaces.Unsigned_16;
    end record;
+   type xcb_configure_request_event_t_p is access all xcb_configure_request_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_configure_request_event_t);
 
    type xcb_gravity_notify_event_t is record
@@ -3473,8 +3475,8 @@ package xcbada_xproto is
    function xcb_change_window_attributes
      (arg1 : System.Address;
       arg2 : xcb_window_t;
-      arg3 : Interfaces.Unsigned_32;
-      arg4 : access Interfaces.Unsigned_32) return xcb.xcb_void_cookie_t;
+      arg3 : xcb_cw_t;
+      arg4 : access xcb_event_mask_t) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_change_window_attributes, "xcb_change_window_attributes");
 
    function xcb_get_window_attributes (arg1 : System.Address; arg2 : xcb_window_t) return xcb_get_window_attributes_cookie_t;
@@ -3559,15 +3561,15 @@ package xcbada_xproto is
    function xcb_configure_window_checked
      (arg1 : System.Address;
       arg2 : xcb_window_t;
-      arg3 : Interfaces.Unsigned_16;
-      arg4 : access Interfaces.Unsigned_32) return xcb.xcb_void_cookie_t;
+      arg3 : xcb_config_window_t;
+      arg4 : xcb.xcb_unsigned32_arr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_configure_window_checked, "xcb_configure_window_checked");
 
    function xcb_configure_window
      (arg1 : System.Address;
       arg2 : xcb_window_t;
-      arg3 : Interfaces.Unsigned_16;
-      arg4 : access Interfaces.Unsigned_32) return xcb.xcb_void_cookie_t;
+      arg3 : xcb_config_window_t;
+      arg4 : xcb.xcb_unsigned32_arr) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_configure_window, "xcb_configure_window");
 
    function xcb_circulate_window_checked
