@@ -506,16 +506,16 @@ package xcbada_xproto is
 
    type xcb_button_press_event_t is record
       response_type : aliased Interfaces.Unsigned_8;
-      detail : aliased xcb_button_t;
+      detail : aliased xcb_button_t; -- uint8
       sequence : aliased Interfaces.Unsigned_16;
-      time : aliased xcb_timestamp_t;
-      root : aliased xcb_window_t;
-      event : aliased xcb_window_t;
-      child : aliased xcb_window_t;
-      root_x : aliased Interfaces.Unsigned_16;
-      root_y : aliased Interfaces.Unsigned_16;
-      event_x : aliased Interfaces.Unsigned_16;
-      event_y : aliased Interfaces.Unsigned_16;
+      time : aliased xcb_timestamp_t; --  uint32
+      root : aliased xcb_window_t; --  uint32
+      event : aliased xcb_window_t; --  uint32
+      child : aliased xcb_window_t; --  uint32
+      root_x : aliased Interfaces.Integer_16;
+      root_y : aliased Interfaces.Integer_16;
+      event_x : aliased Interfaces.Integer_16;
+      event_y : aliased Interfaces.Integer_16;
       state : aliased Interfaces.Unsigned_16;
       same_screen : aliased Interfaces.Unsigned_8;
       pad0 : aliased Interfaces.Unsigned_8;
