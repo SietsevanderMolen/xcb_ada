@@ -69,7 +69,7 @@ package xcb is
       response_type : aliased Interfaces.Unsigned_8;
       pad0          : aliased Interfaces.Unsigned_8;
       sequence      : aliased Interfaces.Unsigned_16;
-      pad1          : aliased xcb_unsigned32_arr (0 .. 6);
+      pad1          : aliased xcb_unsigned32_arr (0 .. 5);
       full_sequence : aliased Interfaces.Unsigned_32;
    end record;
    type xcb_generic_event_t_p is access all xcb_generic_event_t;

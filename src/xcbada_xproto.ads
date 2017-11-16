@@ -80,6 +80,10 @@ package xcbada_xproto is
    subtype xcb_window_t is Interfaces.Unsigned_32;
    type xcb_window_t_p is access all xcb_window_t;
 
+   type int8array_t is array (Integer range <>) of aliased Interfaces.Unsigned_8;
+   type int16array_t is array (Integer range <>) of aliased Interfaces.Unsigned_16;
+   type int32array_t is array (Integer range <>) of aliased Interfaces.Unsigned_32;
+
    type xcb_window_t_arr is array (Integer range <>) of xcb_window_t;
    pragma Convention (C, xcb_window_t_arr);
    for xcb_window_t_arr'Component_Size use xcb_window_t'Size;
@@ -697,6 +701,7 @@ package xcbada_xproto is
       sequence : aliased Interfaces.Unsigned_16;
       parent : aliased xcb_window_t;
       window : aliased xcb_window_t;
+      pad : aliased xcb.xcb_unsigned32_arr (0 .. 4);
    end record;
    type xcb_map_request_event_t_p is access all xcb_map_request_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_map_request_event_t);
@@ -741,6 +746,7 @@ package xcbada_xproto is
       height : aliased Interfaces.Unsigned_16;
       border_width : aliased Interfaces.Unsigned_16;
       value_mask : aliased Interfaces.Unsigned_16;
+      pad : aliased Interfaces.Unsigned_32;
    end record;
    type xcb_configure_request_event_t_p is access all xcb_configure_request_event_t;
    pragma Convention (C_Pass_By_Copy, xcb_configure_request_event_t);
@@ -922,17 +928,14 @@ package xcbada_xproto is
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_colormap_notify_event_t);
 
-   type int8array_t is array (0 .. 19) of aliased Interfaces.Unsigned_8;
-   type int16array_t is array (0 .. 9) of aliased Interfaces.Unsigned_16;
-   type int32array_t is array (0 .. 4) of aliased Interfaces.Unsigned_32;
    type xcb_client_message_data_t (discr : Interfaces.Unsigned_8 := 0) is record
       case discr is
          when 0 =>
-            data8 : aliased int8array_t;
+            data8 : aliased int8array_t (0 .. 19);
          when 1 =>
-            data16 : aliased int16array_t;
+            data16 : aliased int16array_t (0 .. 9);
          when others =>
-            data32 : aliased int32array_t;
+            data32 : aliased int32array_t (0 .. 4);
       end case;
    end record;
    pragma Convention (C_Pass_By_Copy, xcb_client_message_data_t);
@@ -3469,15 +3472,15 @@ package xcbada_xproto is
    function xcb_change_window_attributes_checked
      (arg1 : System.Address;
       arg2 : xcb_window_t;
-      arg3 : Interfaces.Unsigned_32;
-      arg4 : access Interfaces.Unsigned_32) return xcb.xcb_void_cookie_t;
+      arg3 : xcb_cw_t;
+      arg4 : int32array_t) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_change_window_attributes_checked, "xcb_change_window_attributes_checked");
 
    function xcb_change_window_attributes
      (arg1 : System.Address;
       arg2 : xcb_window_t;
       arg3 : xcb_cw_t;
-      arg4 : access xcb_event_mask_t) return xcb.xcb_void_cookie_t;
+      arg4 : int32array_t) return xcb.xcb_void_cookie_t;
    pragma Import (C, xcb_change_window_attributes, "xcb_change_window_attributes");
 
    function xcb_get_window_attributes (arg1 : System.Address; arg2 : xcb_window_t) return xcb_get_window_attributes_cookie_t;
